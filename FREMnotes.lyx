@@ -1,0 +1,830 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Fisher Information for a Poisson variable
+\end_layout
+
+\begin_layout Standard
+This is derivation of the fisher information for Poisson distributed variable
+ 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ with mean 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+X_{k}\sim\textrm{Po}(x_{k},\lambda_{k}(\theta))=\frac{\lambda_{k}^{x_{k}}e^{-\lambda_{k}}}{x_{k}!}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Likelihood
+\end_layout
+
+\begin_layout Standard
+Likelihood of the Poisson distributed variable with detection in K pixels:
+ 
+\begin_inset Formula 
+\begin{equation}
+l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{x_{k}}(\theta)e^{-\lambda_{k}(\theta)}}{x_{k}!}\label{eq:Likelihood of Poisson}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Log-Likelihood:
+\begin_inset Formula 
+\[
+\mathcal{L}=\sum_{k}\left(x_{k}\log\lambda_{k}-\lambda_{k}-\log x_{k}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Fisher Information
+\end_layout
+
+\begin_layout Standard
+Fisher information:
+\begin_inset Formula 
+\begin{equation}
+I(\theta)=-\mathbb{E}\left[\frac{\partial^{2}\mathcal{L}}{\partial\theta^{2}}\right]=\mathbb{E}\left[\left(\frac{\partial\mathcal{L}}{\partial\theta}\right)^{2}\right]=\mathbb{E}\left[\left(\sum_{k}\frac{\partial\log(l_{k})}{\partial\theta}\right)^{2}\right]=\mathbb{E}\left[\left(\sum_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]\label{eq:Fisher Info Definition}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+I(\theta) & =\mathbb{E}\left[\left(\sum_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right)\left(\sum_{m}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right)\right]\\
+ & =\mathbb{E}\left[\sum_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]+\mathbb{E}\left[\sum_{k}\sum_{m\neq k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right]
+\end{alignat*}
+
+\end_inset
+
+as 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+ are iid then the second term can be expressed as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\sum_{k}\sum_{m\neq k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right] & =\sum_{k}\sum_{m\neq k}\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]\mathbb{E}_{m}\left[\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right]
+\end{align*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[f(x_{k})\right]=\int l_{k}f(x_{k})dx_{k}
+\]
+
+\end_inset
+
+But 
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]=\sum_{x}l_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}=\sum_{x}\frac{\partial l_{k}}{\partial\theta}=\frac{\partial\sum_{x}l_{k}}{\partial\theta}=0
+\]
+
+\end_inset
+
+And so the Fisher Information can be expressed 
+\begin_inset Formula 
+\begin{align*}
+I(\theta) & =\mathbb{E}\left[\sum_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]\\
+ & =\sum_{x\geq0}\sum_{k=1}^{k}l_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\\
+ & =\sum_{x\geq0}\sum_{k=1}^{k}\frac{1}{l_{k}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}
+\end{align*}
+
+\end_inset
+
+Derivatives of likelihood Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Likelihood of Poisson"
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\frac{\partial l_{k}}{\partial\theta}=\frac{l_{k}(x_{k}-\lambda_{k})}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta}
+\]
+
+\end_inset
+
+And we get:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+I(\theta) & =\sum_{x\geq0}\sum_{k=1}^{k}\frac{l_{k}(x_{k}-\lambda_{k})^{2}}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\\
+ & =\sum_{k=1}^{k}\frac{1}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\mathbb{E}_{k}\left[x_{k}^{2}-2x_{k}\lambda_{k}+\lambda_{k}{}^{2}\right]
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $\mathbb{E}_{k}\left[x_{k}^{2}\right]=\textrm{var}(x_{k})+\textrm{mean}(x_{k})^{2}$
+\end_inset
+
+ and for Poisson 
+\begin_inset Formula $\mathrm{var}(x)=\mathrm{mean}(x)=\lambda$
+\end_inset
+
+ gives 
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[x_{k}^{2}\right]=\lambda_{k}+\lambda_{k}^{2}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\mathbb{E}_{k}\left[2x_{k}\lambda_{k}\right]=2\lambda_{k}^{2}$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[x_{k}^{2}-2x_{k}\lambda_{k}+\lambda_{k}{}^{2}\right]=\lambda_{k}+\lambda_{k}^{2}-2\lambda_{k}^{2}+\lambda_{k}^{2}=\lambda_{k}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+I(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}
+\]
+
+\end_inset
+
+This is the pixelised version (detection of the photons in K detectors -
+ CCD camera and 
+\begin_inset Formula $\lambda_{k}=\int_{C_{k}}\lambda(x)dx$
+\end_inset
+
+ where 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ is an area of the pixels of the detector).
+ 
+\end_layout
+
+\begin_layout Standard
+Non pixelised version 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ram2006"
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I(\theta)=\int\frac{1}{\lambda(x)}\left(\frac{\partial\lambda(x)}{\partial\theta}\right)^{2}dx
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Time distribution of the intensities (blinking)
+\end_layout
+
+\begin_layout Standard
+For likelihood dependent on parameter 
+\begin_inset Formula $\Lambda_{t}$
+\end_inset
+
+ (T different time slicese)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+fl_{T}(\theta,\Lambda)=\prod_{k=1}^{K}\prod_{t=1}^{T}l_{k}(d,\Lambda_{t})p(\Lambda_{t})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{L}_{T}(d,\Lambda)=\sum_{k=1}^{K}\sum_{t=1}^{T}\left[\log\left(l_{k}(d,\Lambda_{t})\right)+\log\left(p(\Lambda_{t})\right)\right]
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula $p(\Lambda)$
+\end_inset
+
+ is not dependent on 
+\begin_inset Formula $d$
+\end_inset
+
+ then
+\begin_inset Formula 
+\[
+\frac{\partial^{2}\mathcal{L}_{T}(d,\Lambda)}{\partial d^{2}}=\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}
+\]
+
+\end_inset
+
+but in the expectation equation Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info Definition"
+
+\end_inset
+
+ the time dependence appears as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+I_{T}(\theta) & =-\mathbb{E}_{T}\left[\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}\right]=\sum_{t=1}^{T}-\mathbb{E}_{T}\left[\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}\right]=\sum_{t=1}^{T}\mathbb{E}_{T}\left[\left(\frac{\partial\mathcal{L}(d,\Lambda_{t})}{\partial d}\right)^{2}\right]\\
+ & =\sum_{t=1}^{T}\int_{\Lambda_{t}}p(\Lambda_{t})I(\theta)d\Lambda_{t}=\sum_{t,k}\int_{\Lambda_{t}}p(\Lambda_{t})\frac{1}{\lambda_{k}(\Lambda_{t})}\left(\frac{\partial\lambda_{k}(\Lambda_{t})}{\partial d}\right)^{2}d\Lambda_{t}
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Two sources separated by a distance 
+\begin_inset Formula $d$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These are comment on Fisher Information estimation as described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ram2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For two sources separated by a distance 
+\begin_inset Formula $d$
+\end_inset
+
+ we have a mean value of the intensity:
+\begin_inset Formula 
+\[
+\lambda=\Lambda_{1}f_{1}+\Lambda_{2}f_{2}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda_{i}$
+\end_inset
+
+ is the response function and intensity, respectively, of the source 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ For translationally invariant PSF and in-focus sources: 
+\begin_inset Formula $f_{1}=q(x-\frac{d}{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=q(x+\frac{d}{2})$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\lambda(d)=\Lambda_{1}q(x-\frac{d}{2})+\Lambda_{2}q(x+\frac{d}{2})
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $q$
+\end_inset
+
+ is the PSF of the sources.
+ For pixelised version (integral over pixel area 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+)
+\begin_inset Formula 
+\[
+\lambda_{k}(d)=\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx+\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx
+\]
+
+\end_inset
+
+so we get (as described in
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Ram2006"
+
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{equation}
+I(d)=\frac{1}{4}\sum_{k=1}^{K}\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x-\frac{d}{2})dx-\Lambda_{2}\int_{C_{k}}\partial_{x}q(x+\frac{d}{2})dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx+\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx}\label{eq:Fisher Info Pixelised - Ram}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+Limit 
+\begin_inset Formula $d=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\Lambda_{1}=\Lambda_{2}$
+\end_inset
+
+ then 
+\begin_inset Formula $I(d=0)=0$
+\end_inset
+
+ which means 
+\begin_inset Formula $\textrm{var}(d=0)\rightarrow\infty$
+\end_inset
+
+.
+ (This does not hold for 
+\begin_inset Formula $\Lambda_{1}\neq\Lambda_{2}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Subparagraph*
+Limit 
+\begin_inset Formula $d\rightarrow\infty$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When sources are far apart then the mixing term in nominator in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info Pixelised - Ram"
+
+\end_inset
+
+ 
+\begin_inset Formula $\Lambda_{1}\Lambda_{2}\partial_{x}q(x-\frac{d}{2})\partial q(d+\frac{d}{2})=0$
+\end_inset
+
+ as the 
+\begin_inset Formula $\partial_{x}q(x-\frac{d}{2})$
+\end_inset
+
+ (
+\begin_inset Formula $q(x-\frac{d}{2})$
+\end_inset
+
+) and 
+\begin_inset Formula $\partial_{x}q(x+\frac{d}{2})$
+\end_inset
+
+ (
+\begin_inset Formula $q(x+\frac{d}{2})$
+\end_inset
+
+ ) do not have any overlap.
+ The 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info Pixelised - Ram"
+
+\end_inset
+
+ then decomposes into two individual terms (sum of Fisher Information for
+ localisation of individual sources.) 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+I(d) & =\frac{1}{4}\sum_{k=1}^{K}\left[\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x-\frac{d}{2})dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx}+\frac{\left(\Lambda_{2}\int_{C_{k}}\partial_{x}q(x+\frac{d}{2})dx\right)^{2}}{\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx}\right]\\
+ & =\frac{1}{4}\sum_{k=1}^{K}\frac{\left(\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\int_{C_{k}}q(x)dx}\left[\Lambda_{1}+\Lambda_{2}\right]
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Limit 
+\begin_inset Formula $\Lambda_{i}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\Lambda_{1}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\Lambda_{2}=0$
+\end_inset
+
+ 
+\begin_inset Formula $I(d)\neq0$
+\end_inset
+
+.
+ So the variance is finite even if one of the sources is not present.
+\end_layout
+
+\begin_layout Subsection
+An alternative way to derive Fisher information for two sources separated
+ by 
+\begin_inset Formula $d$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+These is a suggestion how to fix the problems with limits for Fisher Information
+ derived above.
+ This gives finite variance even for 
+\begin_inset Formula $d=0$
+\end_inset
+
+ and infinite variance when one of the sources is no present.
+ 
+\end_layout
+
+\begin_layout Standard
+For two sources 
+\begin_inset Formula $f_{1}=q(x-c_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=q(x-c_{2})$
+\end_inset
+
+ we have 
+\begin_inset Formula $\lambda=\Lambda_{1}f_{1}+\Lambda_{2}f_{2}$
+\end_inset
+
+.
+ The distance between the two sources is 
+\begin_inset Formula $d=\left|c_{1}-c_{2}\right|$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{equation}
+\textrm{var}(d)=\textrm{var}(c_{1})+\textrm{var}(c_{2})=\frac{1}{I(c_{1})}+\frac{1}{I(c_{2})}\label{eq:variance alternative}
+\end{equation}
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+I(c_{1})=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial c_{1}}\right)^{2}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x-c_{1})dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x-c_{1})dx+\Lambda_{2}\int_{C_{k}}q(x-c_{2})dx}
+\]
+
+\end_inset
+
+if this keeps translational invariance (non-pixelised version does as 
+\begin_inset Formula $\int_{\mathbb{R}}g(x+c)dx=\int_{\mathbb{R}}g(x)dx$
+\end_inset
+
+) then 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I(c_{1})=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x)dx+\Lambda_{2}\int_{C_{k}}q(x+d)dx}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $d=c_{1}-c_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+I(c_{2})=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\Lambda_{2}\int_{C_{k}}q(x)dx+\Lambda_{1}\int_{C_{k}}q(x-d)dx}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For symmetrical PSF 
+\begin_inset Formula $q(x-d)=q(x+d)$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{equation}
+I(c_{i})=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\Lambda_{i}\int_{C_{k}}q(x)dx+\Lambda_{j}\int_{C_{k}}q(x-d)dx}\label{eq:Fisher Information alternative - Individual}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Limit 
+\begin_inset Formula $d=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $d=0$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+I(c_{i})=\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}\sum_{k=1}^{K}\frac{\left(\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\int_{C_{k}}q(x)dx}\neq0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For non-pixelised version, 
+\begin_inset Formula $\Lambda_{1}=\Lambda_{2}=\Lambda$
+\end_inset
+
+ and for Gaussian approximation of the PSF (
+\begin_inset Formula $q(x-a)\propto\exp\left(-\frac{(x-a)^{2}}{2\sigma^{2}}\right)$
+\end_inset
+
+ (with 
+\begin_inset Formula $\sigma=\frac{\sqrt{2}}{2\pi}\frac{\lambda}{NA}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang2007"
+
+\end_inset
+
+) we have 
+\begin_inset Formula $\partial_{x}q(x)=\frac{1}{\sigma^{2}}xq(x)$
+\end_inset
+
+ and for 
+\begin_inset Formula $d=0$
+\end_inset
+
+ we get
+\begin_inset Formula 
+\[
+I(c_{i})=\frac{1}{2}\frac{\Lambda}{\sigma^{4}}\int_{\mathbb{R}}x^{2}q(x)dx=\frac{1}{2}\frac{\Lambda}{\sigma^{4}}(\textrm{var}(q(x))-\textrm{mean}(q(x))^{2})=\frac{1}{2}\frac{\Lambda}{\sigma^{4}}\sigma^{2}=\frac{1}{2}\frac{\Lambda}{\sigma^{2}}\neq0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+Limit 
+\begin_inset Formula $d\rightarrow\infty$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I(c_{i})=\Lambda\int\frac{\left(\Lambda_{i}\partial_{x}q(x)\right)^{2}}{\Lambda_{i}q(x)+\Lambda_{j}q(x-d)}dx=\Lambda_{i}\int_{\mathbb{R}}\frac{\left(\partial_{x}q(x)\right)^{2}}{q(x)}dx
+\]
+
+\end_inset
+
+as the PSF 
+\begin_inset Formula $q(x)$
+\end_inset
+
+ (and also 
+\begin_inset Formula $\partial_{x}q(x)$
+\end_inset
+
+) have a finite support, if 
+\begin_inset Formula $d$
+\end_inset
+
+ is big, 
+\begin_inset Formula $q(x-d)$
+\end_inset
+
+ is outside the support of the 
+\begin_inset Formula $\partial_{x}q(x)$
+\end_inset
+
+.
+ They have no overlap so it doesn't have any effect in the denominator.
+\end_layout
+
+\begin_layout Standard
+For non-pixelised version, 
+\begin_inset Formula $\Lambda_{1}=\Lambda_{2}=\Lambda$
+\end_inset
+
+ and for Gaussian approximation of the PSF:
+\begin_inset Formula 
+\begin{alignat*}{1}
+I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}=2I(d=0)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Limit 
+\begin_inset Formula $\Lambda_{i}=0,\ \Lambda_{j}\neq0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $I(c_{i})=0,\ I(c_{j})\neq0$
+\end_inset
+
+ and for variance 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:variance alternative"
+
+\end_inset
+
+ 
+\begin_inset Formula $\textrm{var}(d)=\frac{1}{I(c_{1})}+\frac{1}{I(c_{2})}\rightarrow\infty$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "Ram,Zhang"
+options "apalike"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
