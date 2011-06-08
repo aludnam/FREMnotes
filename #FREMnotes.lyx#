@@ -97,7 +97,8 @@ Likelihood
 \end_layout
 
 \begin_layout Standard
-Likelihood of the Poisson distiributed variable: 
+Likelihood of the Poisson distributed variable with detection in K pixels:
+ 
 \begin_inset Formula 
 \begin{equation}
 l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{x_{k}}(\theta)e^{-\lambda_{k}(\theta)}}{x_{k}!}\label{eq:Likelihood of Poisson}
@@ -109,11 +110,7 @@ l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{x_{k}}(\theta)e
 \end_layout
 
 \begin_layout Standard
-Log-Likelihood with detection in 
-\begin_inset Formula $K$
-\end_inset
-
- pixels:
+Log-Likelihood:
 \begin_inset Formula 
 \[
 \mathcal{L}=\sum_{k}\left(x_{k}\log\lambda_{k}-\lambda_{k}-\log x_{k}\right)
@@ -247,9 +244,9 @@ and
 
 and 
 \begin_inset Formula 
-\[
-I(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}
-\]
+\begin{equation}
+I(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\label{eq:Fisher Info for Poisson}
+\end{equation}
 
 \end_inset
 
@@ -290,11 +287,11 @@ Time distribution of the intensities (blinking)
 \end_layout
 
 \begin_layout Standard
-For likelihood with distribution of 
-\begin_inset Formula $\Lambda$
+For likelihood dependent on parameter 
+\begin_inset Formula $\Lambda_{t}$
 \end_inset
 
- (T different time slices)
+ (T different time slicese)
 \end_layout
 
 \begin_layout Standard
@@ -346,7 +343,7 @@ reference "eq:Fisher Info Definition"
 \begin_inset Formula 
 \begin{alignat*}{1}
 I_{T}(\theta) & =-\mathbb{E}_{T}\left[\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}\right]=\sum_{t=1}^{T}-\mathbb{E}_{T}\left[\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}\right]=\sum_{t=1}^{T}\mathbb{E}_{T}\left[\left(\frac{\partial\mathcal{L}(d,\Lambda_{t})}{\partial d}\right)^{2}\right]\\
- & =\sum_{t=1}^{T}\int_{\Lambda_{t}}p(\Lambda_{t})I(\theta)d\Lambda_{t}=\sum_{t,k}\int_{\Lambda_{t}}p(\Lambda_{t})\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial d}\right)^{2}d\Lambda_{t}
+ & =\sum_{t=1}^{T}\int_{\Lambda_{t}}p(\Lambda_{t})I(\theta)d\Lambda_{t}=\sum_{t,k}\int_{\Lambda_{t}}p(\Lambda_{t})\frac{1}{\lambda_{k}(\Lambda_{t})}\left(\frac{\partial\lambda_{k}(\Lambda_{t})}{\partial d}\right)^{2}d\Lambda_{t}
 \end{alignat*}
 
 \end_inset
@@ -364,6 +361,13 @@ I_{T}(\theta) & =-\mathbb{E}_{T}\left[\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L
 \begin_layout Subsection
 Two sources separated by a distance 
 \begin_inset Formula $d$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Two-sources-separated"
+
 \end_inset
 
 
@@ -582,13 +586,18 @@ An alternative way to derive Fisher information for two sources separated
 \end_layout
 
 \begin_layout Standard
-These is a suggestion how to fix the problems with limits for Fisher Information
+This is a suggestion how to fix the problems with limits for Fisher Information
  derived above.
- This gives finite variance even for 
+ This gives infinite variance when one of the sources is no present.
+ Also fix weird behavior of the 
+\begin_inset Formula $I(d)$
+\end_inset
+
+ for 
 \begin_inset Formula $d=0$
 \end_inset
 
- and infinite variance when one of the sources is no present.
+.
  
 \end_layout
 
@@ -607,26 +616,122 @@ For two sources
 
 .
  The distance between the two sources is 
-\begin_inset Formula $d=\left|c_{1}-c_{2}\right|$
+\begin_inset Formula $d=c_{1}-c_{2}$
+\end_inset
+
+.
+ This is a linear combination 
+\begin_inset Formula $\bm{a}^{T}\cdot\bm{c}$
+\end_inset
+
+ of the variable 
+\begin_inset Formula $\bm{c}=(c_{1},c_{2})$
+\end_inset
+
+ where 
+\begin_inset Formula $\bm{a}=(1,-1)$
+\end_inset
+
+.
+ The variance of 
+\begin_inset Formula $d$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+\textrm{var}(d)=\textrm{var}(\bm{a}^{T}\cdot\bm{c})=\bm{a}^{T}\cdot\bm{Q}\cdot\bm{a}=Q_{11}+Q_{22}-2Q_{12}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\bm{Q}$
+\end_inset
+
+ is a covariance matrix 
+\begin_inset Formula $\bm{Q}=\bm{I}^{-1}(\theta)$
 \end_inset
 
  and 
+\begin_inset Formula $\bm{I}(\theta)$
+\end_inset
+
+ is the Fisher information matrix (symmetric 
+\begin_inset Formula $I_{12}=I_{21}$
+\end_inset
+
+) 
 \begin_inset Formula 
-\begin{equation}
-\textrm{var}(d)=\textrm{var}(c_{1})+\textrm{var}(c_{2})=\frac{1}{I(c_{1})}+\frac{1}{I(c_{2})}\label{eq:variance alternative}
-\end{equation}
+\[
+\bm{I}(\theta)=\left(\begin{array}{cc}
+I_{11} & I_{12}\\
+I_{12} & I_{22}
+\end{array}\right)
+\]
+
+\end_inset
+
+given by generalisation of Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info for Poisson"
 
 \end_inset
 
  
 \begin_inset Formula 
 \[
-I(c_{1})=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial c_{1}}\right)^{2}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x-c_{1})dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x-c_{1})dx+\Lambda_{2}\int_{C_{k}}q(x-c_{2})dx}
+I_{ij}(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta_{i}}\frac{\partial\lambda_{k}}{\partial\theta_{j}}
 \]
 
 \end_inset
 
-if this keeps translational invariance (non-pixelised version does as 
+The covariance matrix 
+\begin_inset Formula $\bm{Q}$
+\end_inset
+
+ is then 
+\begin_inset Formula 
+\[
+\bm{Q}=\bm{I}^{-1}(\theta)=\frac{1}{I_{11}I_{12}-I_{12}^{2}}\left(\begin{array}{cc}
+I_{22} & -I_{12}\\
+-I_{12} & I_{11}
+\end{array}\right)
+\]
+
+\end_inset
+
+and the variance of 
+\begin_inset Formula $d=c_{1}-c_{2}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+\textrm{var}(d)=\frac{I_{11}+I_{22}-2I_{12}}{I_{11}I_{12}-I_{12}^{2}}\label{eq:variance alternative}
+\end{equation}
+
+\end_inset
+
+The individual terms of the Fisher Information matrix 
+\begin_inset Formula 
+\[
+I_{11}=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial c_{1}}\right)^{2}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x-c_{1})\right)^{2}}{\Lambda_{1}q_{k}(x-c_{1})+\Lambda_{2}q_{k}(x-c_{2})}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $q_{k}(x)=\int_{C_{k}}q(x)dx$
+\end_inset
+
+ and 
+\begin_inset Formula $q'_{k}(x)=\int_{C_{k}}\frac{\partial q(x)}{\partial x}dx$
+\end_inset
+
+.
+ If this keeps translational invariance (non-pixelised version does as 
 \begin_inset Formula $\int_{\mathbb{R}}g(x+c)dx=\int_{\mathbb{R}}g(x)dx$
 \end_inset
 
@@ -636,7 +741,7 @@ if this keeps translational invariance (non-pixelised version does as
 \begin_layout Standard
 \begin_inset Formula 
 \[
-I(c_{1})=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x)dx+\Lambda_{2}\int_{C_{k}}q(x+d)dx}
+I_{11}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x)\right)^{2}}{\Lambda_{1}q_{k}(x)+\Lambda_{2}q_{k}(x+d)}
 \]
 
 \end_inset
@@ -648,7 +753,7 @@ where
  and 
 \begin_inset Formula 
 \[
-I(c_{2})=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\Lambda_{2}\int_{C_{k}}q(x)dx+\Lambda_{1}\int_{C_{k}}q(x-d)dx}
+I_{22}=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}q'_{k}(x)\right)^{2}}{\Lambda_{2}q_{k}(x)+\Lambda_{1}q_{k}(x-d)}
 \]
 
 \end_inset
@@ -664,8 +769,20 @@ For symmetrical PSF
  we have 
 \begin_inset Formula 
 \begin{equation}
-I(c_{i})=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\Lambda_{i}\int_{C_{k}}q(x)dx+\Lambda_{j}\int_{C_{k}}q(x-d)dx}\label{eq:Fisher Information alternative - Individual}
+I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q'_{k}(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}\label{eq:Fisher Information alternative - Individual}
 \end{equation}
+
+\end_inset
+
+And the cross term (
+\begin_inset Formula $i\neq j$
+\end_inset
+
+) 
+\begin_inset Formula 
+\[
+I_{ij}=\sum_{k=1}^{K}\frac{\Lambda_{i}\Lambda_{j}q'_{k}(x)q'_{k}(x-d)}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}
+\]
 
 \end_inset
 
@@ -674,7 +791,7 @@ I(c_{i})=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}\int_{C_{k}}\partial_{x}q(x)dx\rig
 
 \begin_layout Subparagraph
 Limit 
-\begin_inset Formula $d=0$
+\begin_inset Formula $d\rightarrow0$
 \end_inset
 
 
@@ -685,15 +802,256 @@ For
 \begin_inset Formula $d=0$
 \end_inset
 
- we have 
+ we have
+\begin_inset Formula 
+\begin{alignat*}{1}
+I_{ii} & =\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}S(0)\\
+I_{ij} & =\frac{\Lambda_{i}\Lambda_{j}}{\Lambda_{i}+\Lambda_{j}}S(0)
+\end{alignat*}
+
+\end_inset
+
+where 
+\begin_inset Formula $S(d)=\sum_{k=1}^{K}\frac{\left(q'_{k}(x)\right)^{2}}{q_{k}(x)+q_{k}(x-d)}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Numerator 
+\begin_inset Formula $p$
+\end_inset
+
+ in Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:variance alternative"
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
-I(c_{i})=\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}\sum_{k=1}^{K}\frac{\left(\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\int_{C_{k}}q(x)dx}\neq0
+p=I_{11}+I_{22}-2I_{12}=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}^{2}+\Lambda_{2}^{2}-2\Lambda_{1}\Lambda_{2})=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}-\Lambda_{2})^{2}
+\]
+
+\end_inset
+
+ is non-zero for 
+\begin_inset Formula $\Lambda_{1}\neq\Lambda_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The denominator 
+\begin_inset Formula $r$
+\end_inset
+
+ ( 
+\begin_inset Formula $\det\left[\bm{I}(\theta)\right]$
+\end_inset
+
+) in Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:variance alternative"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+r=\det\left[\bm{I}(\theta)\right]=I_{11}I_{22}-I_{12}^{2}=\frac{S^{2}(0)}{\left(\Lambda_{1}+\Lambda_{2}\right)^{2}}\left(\Lambda_{1}^{2}\Lambda_{2}^{2}-(\Lambda_{1}\Lambda_{2})^{2}\right) & \equiv & 0\ \text{for any }\Lambda_{i}
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Formula $\bm{I}(\theta)$
+\end_inset
+
+ is therefore a singular matrix for 
+\begin_inset Formula $d=0$
+\end_inset
+
+ and inversion 
+\begin_inset Formula $\bm{I}^{-1}(\theta)$
+\end_inset
+
+ does not exist.
+ 
+\end_layout
+
+\begin_layout Standard
+However, for the limit 
+\begin_inset Formula $d\rightarrow0$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda_{1}\neq\Lambda_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $p\neq0,\, r\rightarrow0$
+\end_inset
+
+ and 
+\begin_inset Formula $\textrm{var}(d\rightarrow0)=\frac{p}{r}\rightarrow\infty$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\Lambda_{1}=\Lambda_{2}=\Lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $d\rightarrow0$
+\end_inset
+
+ we ger 
+\begin_inset Formula $r\rightarrow0,\, p\rightarrow0$
+\end_inset
+
+.
+ We can express the product of diagonal terms
+\begin_inset Formula 
+\[
+I_{11}I_{22}=\frac{\Lambda^{2}}{2}S^{2}(d)
 \]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $d\rightarrow0$
+\end_inset
+
+ we can express 
+\begin_inset Formula $q'_{k}(x-d)=q'_{k}(x)+\xi_{k}d+o(d^{2})$
+\end_inset
+
+ up to linear terms of 
+\begin_inset Formula $d$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+I_{ij}=\Lambda\sum_{k=1}^{K}\frac{q'_{k}(x)\left(q'_{k}(x)+\xi_{k}d\right)}{q_{k}(x)+q_{k}(x-d)}=\Lambda S(d)+\Lambda d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{ij}^{2}=\Lambda^{2}S^{2}(d)+2\Lambda^{2}d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}S(d)
+\]
+
+\end_inset
+
+Then up to linear terms of 
+\begin_inset Formula $d$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{alignat*}{1}
+I_{11}+I_{22}-2I_{12} & =-2\Lambda d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}\\
+I_{11}I_{22}-I_{12}^{2} & =-2\Lambda^{2}d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}S(d)
+\end{alignat*}
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\lim_{d\rightarrow0}\left(\textrm{var}(d)\right)=\frac{I_{11}+I_{22}-2I_{12}}{I_{11}I_{22}-I_{12}^{2}}=\frac{1}{\Lambda S(0)}
+\]
+
+\end_inset
+
+which is non zero....
+ ? (for Gaussian approximation - below 
+\begin_inset Formula $S(0)\approx\int_{\mathbb{R}}\frac{q'(x)}{2q(x)}dx=\frac{1}{2\sigma^{2}}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+The situation is somehow inverted compared to the 
+\end_layout
+
+\begin_layout Subparagraph*
+Limit 
+\begin_inset Formula $d\rightarrow\infty$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The cross term 
+\begin_inset Formula $I_{ij}=0,\: i\neq j$
+\end_inset
+
+ and we get 
+\begin_inset Formula 
+\[
+\textrm{var}(d)=\frac{1}{I_{11}}+\frac{1}{I_{22}}
+\]
+
+\end_inset
+
+and 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I_{ii}=\Lambda\int\frac{\left(\Lambda_{i}q'(x)\right)^{2}}{\Lambda_{i}q(x)+\Lambda_{j}q(x-d)}dx=\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}\int_{\mathbb{R}}\frac{\left(q'(x)\right)^{2}}{q(x)}dx
+\]
+
+\end_inset
+
+as the PSF 
+\begin_inset Formula $q(x)$
+\end_inset
+
+ (and also 
+\begin_inset Formula $q'(x)$
+\end_inset
+
+) have a finite support, if 
+\begin_inset Formula $d$
+\end_inset
+
+ is big, 
+\begin_inset Formula $q(x-d)$
+\end_inset
+
+ is outside the support of the 
+\begin_inset Formula $q'(x)$
+\end_inset
+
+.
+ They have no overlap so it doesn't have any effect in the denominator.
 \end_layout
 
 \begin_layout Standard
@@ -717,73 +1075,17 @@ key "Zhang2007"
 \end_inset
 
 ) we have 
-\begin_inset Formula $\partial_{x}q(x)=\frac{1}{\sigma^{2}}xq(x)$
+\begin_inset Formula $q'(x)=\frac{1}{\sigma^{2}}xq(x)$
 \end_inset
 
- and for 
-\begin_inset Formula $d=0$
-\end_inset
-
- we get
-\begin_inset Formula 
-\[
-I(c_{i})=\frac{1}{2}\frac{\Lambda}{\sigma^{4}}\int_{\mathbb{R}}x^{2}q(x)dx=\frac{1}{2}\frac{\Lambda}{\sigma^{4}}(\textrm{var}(q(x))-\textrm{mean}(q(x))^{2})=\frac{1}{2}\frac{\Lambda}{\sigma^{4}}\sigma^{2}=\frac{1}{2}\frac{\Lambda}{\sigma^{2}}\neq0
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subparagraph*
-Limit 
-\begin_inset Formula $d\rightarrow\infty$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-I(c_{i})=\Lambda\int\frac{\left(\Lambda_{i}\partial_{x}q(x)\right)^{2}}{\Lambda_{i}q(x)+\Lambda_{j}q(x-d)}dx=\Lambda_{i}\int_{\mathbb{R}}\frac{\left(\partial_{x}q(x)\right)^{2}}{q(x)}dx
-\]
-
-\end_inset
-
-as the PSF 
-\begin_inset Formula $q(x)$
-\end_inset
-
- (and also 
-\begin_inset Formula $\partial_{x}q(x)$
-\end_inset
-
-) have a finite support, if 
-\begin_inset Formula $d$
-\end_inset
-
- is big, 
-\begin_inset Formula $q(x-d)$
-\end_inset
-
- is outside the support of the 
-\begin_inset Formula $\partial_{x}q(x)$
-\end_inset
-
-.
- They have no overlap so it doesn't have any effect in the denominator.
-\end_layout
-
-\begin_layout Standard
-For non-pixelised version, 
+ and and for 
 \begin_inset Formula $\Lambda_{1}=\Lambda_{2}=\Lambda$
 \end_inset
 
  and for Gaussian approximation of the PSF:
 \begin_inset Formula 
 \begin{alignat*}{1}
-I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}=2I(d=0)
+I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}
 \end{alignat*}
 
 \end_inset
@@ -800,10 +1102,19 @@ Limit
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $I(c_{i})=0,\ I(c_{j})\neq0$
+then 
+\begin_inset Formula $I_{ii}\equiv0$
 \end_inset
 
- and for variance 
+ and 
+\begin_inset Formula $I_{ij}\equiv0$
+\end_inset
+
+ and so 
+\begin_inset Formula $\det(\bm{I}(\theta)\equiv0$
+\end_inset
+
+ and the variance 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:variance alternative"
@@ -811,7 +1122,7 @@ reference "eq:variance alternative"
 \end_inset
 
  
-\begin_inset Formula $\textrm{var}(d)=\frac{1}{I(c_{1})}+\frac{1}{I(c_{2})}\rightarrow\infty$
+\begin_inset Formula $\textrm{var}(d)\rightarrow\infty$
 \end_inset
 
 .
@@ -822,7 +1133,7 @@ reference "eq:variance alternative"
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "Ram,Zhang"
-options "mbplain"
+options "apalike"
 
 \end_inset
 
