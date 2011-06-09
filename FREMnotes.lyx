@@ -908,7 +908,7 @@ The cross term
 \begin_inset Formula $I_{ij}=0,\: i\neq j$
 \end_inset
 
- and we get 
+ and we get f
 \begin_inset Formula 
 \[
 \textrm{var}(d)=\frac{1}{I_{11}}+\frac{1}{I_{22}}
@@ -922,7 +922,7 @@ and
 \begin_layout Standard
 \begin_inset Formula 
 \[
-I_{ii}=\Lambda\int\frac{\left(\Lambda_{i}q'(x)\right)^{2}}{\Lambda_{i}q(x)+\Lambda_{j}q(x-d)}dx=\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}\int_{\mathbb{R}}\frac{\left(q'(x)\right)^{2}}{q(x)}dx
+I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q_{k}'(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}=\Lambda_{i}\sum_{k=1}^{K}\frac{\left(q_{k}'(x)\right)^{2}}{q_{k}(x)}=2\Lambda_{i}S(0)
 \]
 
 \end_inset
@@ -979,10 +979,15 @@ key "Zhang2007"
 \begin_inset Formula $\Lambda_{1}=\Lambda_{2}=\Lambda$
 \end_inset
 
- and for Gaussian approximation of the PSF:
+ and for Gaussian approximation of the PSF 
+\begin_inset Formula $S(0)=\frac{1}{2\sigma^{2}}$
+\end_inset
+
+:
 \begin_inset Formula 
 \begin{alignat*}{1}
-I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}
+I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}\\
+\textrm{var}(d\rightarrow\infty) & =\frac{\sigma^{2}}{\Lambda}
 \end{alignat*}
 
 \end_inset
@@ -1008,10 +1013,15 @@ then
 \end_inset
 
  and so 
-\begin_inset Formula $\det(\bm{I}(\theta)\equiv0$
+\begin_inset Formula $\det(\bm{I}(\theta))\equiv0$
 \end_inset
 
- and the variance 
+, and matrix is singular.
+ In the limit 
+\begin_inset Formula $\Lambda_{i}\rightarrow0$
+\end_inset
+
+ the variance 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:variance alternative"

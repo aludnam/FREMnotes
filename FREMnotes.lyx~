@@ -709,7 +709,7 @@ and the variance of
  
 \begin_inset Formula 
 \begin{equation}
-\textrm{var}(d)=\frac{I_{11}+I_{22}-2I_{12}}{I_{11}I_{12}-I_{12}^{2}}\label{eq:variance alternative}
+\textrm{var}(d)=\frac{I_{11}+I_{22}+2I_{12}}{I_{11}I_{12}-I_{12}^{2}}\label{eq:variance alternative}
 \end{equation}
 
 \end_inset
@@ -834,28 +834,20 @@ reference "eq:variance alternative"
  
 \begin_inset Formula 
 \[
-p=I_{11}+I_{22}-2I_{12}=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}^{2}+\Lambda_{2}^{2}-2\Lambda_{1}\Lambda_{2})=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}-\Lambda_{2})^{2}
+p=I_{11}+I_{22}+2I_{12}=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}^{2}+\Lambda_{2}^{2}+2\Lambda_{1}\Lambda_{2})=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}+\Lambda_{2})^{2}
 \]
 
 \end_inset
 
- is non-zero for 
-\begin_inset Formula $\Lambda_{1}\neq\Lambda_{2}$
+ is non-zero for any 
+\begin_inset Formula $\Lambda_{1},\,\Lambda_{2}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-The denominator 
-\begin_inset Formula $r$
-\end_inset
-
- ( 
-\begin_inset Formula $\det\left[\bm{I}(\theta)\right]$
-\end_inset
-
-) in Eq.
+The denominator in Eq.
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:variance alternative"
@@ -892,10 +884,6 @@ However, for the limit
 \end_inset
 
  and 
-\begin_inset Formula $\Lambda_{1}\neq\Lambda_{2}$
-\end_inset
-
-, 
 \begin_inset Formula $p\neq0,\, r\rightarrow0$
 \end_inset
 
@@ -905,124 +893,6 @@ However, for the limit
 
 .
  
-\end_layout
-
-\begin_layout Standard
-For 
-\begin_inset Formula $\Lambda_{1}=\Lambda_{2}=\Lambda$
-\end_inset
-
- and 
-\begin_inset Formula $d\rightarrow0$
-\end_inset
-
- we ger 
-\begin_inset Formula $r\rightarrow0,\, p\rightarrow0$
-\end_inset
-
-.
- We can express the product of diagonal terms
-\begin_inset Formula 
-\[
-I_{11}I_{22}=\frac{\Lambda^{2}}{2}S^{2}(d)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-For 
-\begin_inset Formula $d\rightarrow0$
-\end_inset
-
- we can express 
-\begin_inset Formula $q'_{k}(x-d)=q'_{k}(x)+\xi_{k}d+o(d^{2})$
-\end_inset
-
- up to linear terms of 
-\begin_inset Formula $d$
-\end_inset
-
- and 
-\begin_inset Formula 
-\[
-I_{ij}=\Lambda\sum_{k=1}^{K}\frac{q'_{k}(x)\left(q'_{k}(x)+\xi_{k}d\right)}{q_{k}(x)+q_{k}(x-d)}=\Lambda S(d)+\Lambda d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-I_{ij}^{2}=\Lambda^{2}S^{2}(d)+2\Lambda^{2}d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}S(d)
-\]
-
-\end_inset
-
-Then up to linear terms of 
-\begin_inset Formula $d$
-\end_inset
-
- 
-\begin_inset Formula 
-\begin{alignat*}{1}
-I_{11}+I_{22}-2I_{12} & =-2\Lambda d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}\\
-I_{11}I_{22}-I_{12}^{2} & =-2\Lambda^{2}d\sum_{k=1}^{K}\frac{\xi_{k}q'_{k}(x)}{q_{k}(x)+q_{k}(x-d)}S(d)
-\end{alignat*}
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\[
-\lim_{d\rightarrow0}\left(\textrm{var}(d)\right)=\frac{I_{11}+I_{22}-2I_{12}}{I_{11}I_{22}-I_{12}^{2}}=\frac{1}{\Lambda S(0)}
-\]
-
-\end_inset
-
-which is non zero....
- ? (for Gaussian approximation - below 
-\begin_inset Formula $S(0)\approx\int_{\mathbb{R}}\frac{q'(x)}{2q(x)}dx=\frac{1}{2\sigma^{2}}$
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-The situation is somehow inverted compared to the section
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Two-sources-separated"
-
-\end_inset
-
- wherer for 
-\begin_inset Formula $d\rightarrow0$
-\end_inset
-
- and 
-\begin_inset Formula $\Lambda_{1}=\Lambda_{2}$
-\end_inset
-
- 
-\begin_inset Formula $\textrm{var}(d)$
-\end_inset
-
- diverges and is finite for 
-\begin_inset Formula $\Lambda_{1}\neq\Lambda_{2}$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Subparagraph*
@@ -1052,7 +922,7 @@ and
 \begin_layout Standard
 \begin_inset Formula 
 \[
-I_{ii}=\Lambda\int\frac{\left(\Lambda_{i}q'(x)\right)^{2}}{\Lambda_{i}q(x)+\Lambda_{j}q(x-d)}dx=\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}\int_{\mathbb{R}}\frac{\left(q'(x)\right)^{2}}{q(x)}dx
+I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q_{k}'(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}=\Lambda_{i}\sum_{k=1}^{K}\frac{\left(q_{k}'(x)\right)^{2}}{q_{k}(x)}=2\Lambda_{i}S(0)
 \]
 
 \end_inset
@@ -1109,10 +979,15 @@ key "Zhang2007"
 \begin_inset Formula $\Lambda_{1}=\Lambda_{2}=\Lambda$
 \end_inset
 
- and for Gaussian approximation of the PSF:
+ and for Gaussian approximation of the PSF 
+\begin_inset Formula $S(0)=\frac{1}{2\sigma^{2}}$
+\end_inset
+
+:
 \begin_inset Formula 
 \begin{alignat*}{1}
-I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}
+I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}\\
+\textrm{var}(d\rightarrow\infty) & =\frac{\sigma^{2}}{\Lambda}
 \end{alignat*}
 
 \end_inset
@@ -1138,10 +1013,15 @@ then
 \end_inset
 
  and so 
-\begin_inset Formula $\det(\bm{I}(\theta)\equiv0$
+\begin_inset Formula $\det(\bm{I}(\theta))\equiv0$
 \end_inset
 
- and the variance 
+, and matrix is singular.
+ In the limit 
+\begin_inset Formula $\Lambda_{i}\rightarrow0$
+\end_inset
+
+ the variance 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:variance alternative"
