@@ -1,4 +1,4 @@
-#LyX 1.6.8 created this file. For more info see http://www.lyx.org/
+#LyX 2.0.0 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -14,7 +14,6 @@
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \paperfontsize default
 \spacing single
@@ -33,14 +32,12 @@
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
-\defskip medskip
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
-\author "" 
 \end_header
 
 \begin_body
@@ -63,8 +60,10 @@ This is derivation of the fisher information for Poisson distributed variable
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-X_{k}\sim\textrm{Po}(x_{k},\lambda_{k}(\theta))=\frac{\lambda_{k}^{x_{k}}e^{-\lambda_{k}}}{x_{k}!}\]
+\begin_inset Formula 
+\[
+X_{k}\sim\textrm{Po}(x_{k},\lambda_{k}(\theta))=\frac{\lambda_{k}^{x_{k}}e^{-\lambda_{k}}}{x_{k}!}
+\]
 
 \end_inset
 
@@ -78,8 +77,10 @@ Likelihood
 \begin_layout Standard
 Likelihood of the Poisson distributed variable with detection in K pixels:
  
-\begin_inset Formula \begin{equation}
-l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{x_{k}}(\theta)e^{-\lambda_{k}(\theta)}}{x_{k}!}\label{eq:Likelihood of Poisson}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{x_{k}}(\theta)e^{-\lambda_{k}(\theta)}}{x_{k}!}\label{eq:Likelihood of Poisson}
+\end{equation}
 
 \end_inset
 
@@ -88,8 +89,10 @@ l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{x_{k}}(\theta)e
 
 \begin_layout Standard
 Log-Likelihood:
-\begin_inset Formula \[
-\mathcal{L}=\sum_{k}\left(x_{k}\log\lambda_{k}-\lambda_{k}-\log x_{k}\right)\]
+\begin_inset Formula 
+\[
+\mathcal{L}=\sum_{k}\left(x_{k}\log\lambda_{k}-\lambda_{k}-\log x_{k}\right)
+\]
 
 \end_inset
 
@@ -102,8 +105,10 @@ Fisher Information
 
 \begin_layout Standard
 Fisher information:
-\begin_inset Formula \begin{equation}
-I(\theta)=-\mathbb{E}\left[\frac{\partial^{2}\mathcal{L}}{\partial\theta^{2}}\right]=\mathbb{E}\left[\left(\frac{\partial\mathcal{L}}{\partial\theta}\right)^{2}\right]=\mathbb{E}\left[\left(\sum_{k}\frac{\partial\log(l_{k})}{\partial\theta}\right)^{2}\right]=\mathbb{E}\left[\left(\sum_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]\label{eq:Fisher Info Definition}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+I(\theta)=-\mathbb{E}\left[\frac{\partial^{2}\mathcal{L}}{\partial\theta^{2}}\right]=\mathbb{E}\left[\left(\frac{\partial\mathcal{L}}{\partial\theta}\right)^{2}\right]=\mathbb{E}\left[\left(\sum_{k}\frac{\partial\log(l_{k})}{\partial\theta}\right)^{2}\right]=\mathbb{E}\left[\left(\sum_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]\label{eq:Fisher Info Definition}
+\end{equation}
 
 \end_inset
 
@@ -111,9 +116,11 @@ I(\theta)=-\mathbb{E}\left[\frac{\partial^{2}\mathcal{L}}{\partial\theta^{2}}\ri
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{alignat*}{1}
+\begin_inset Formula 
+\begin{alignat*}{1}
 I(\theta) & =\mathbb{E}\left[\left(\sum_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right)\left(\sum_{m}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right)\right]\\
- & =\mathbb{E}\left[\sum_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]+\mathbb{E}\left[\sum_{k}\sum_{m\neq k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right]\end{alignat*}
+ & =\mathbb{E}\left[\sum_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]+\mathbb{E}\left[\sum_{k}\sum_{m\neq k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right]
+\end{alignat*}
 
 \end_inset
 
@@ -125,28 +132,36 @@ as
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{align*}
-\mathbb{E}\left[\sum_{k}\sum_{m\neq k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right] & =\sum_{k}\sum_{m\neq k}\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]\mathbb{E}_{m}\left[\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right]\end{align*}
+\begin_inset Formula 
+\begin{align*}
+\mathbb{E}\left[\sum_{k}\sum_{m\neq k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right] & =\sum_{k}\sum_{m\neq k}\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]\mathbb{E}_{m}\left[\frac{1}{l_{m}}\frac{\partial l_{m}}{\partial\theta}\right]
+\end{align*}
 
 \end_inset
 
 where
-\begin_inset Formula \[
-\mathbb{E}_{k}\left[f(x_{k})\right]=\int l_{k}f(x_{k})dx_{k}\]
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[f(x_{k})\right]=\int l_{k}f(x_{k})dx_{k}
+\]
 
 \end_inset
 
 But 
-\begin_inset Formula \[
-\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]=\sum_{x}l_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}=\sum_{x}\frac{\partial l_{k}}{\partial\theta}=\frac{\partial\sum_{x}l_{k}}{\partial\theta}=0\]
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]=\sum_{x}l_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}=\sum_{x}\frac{\partial l_{k}}{\partial\theta}=\frac{\partial\sum_{x}l_{k}}{\partial\theta}=0
+\]
 
 \end_inset
 
 And so the Fisher Information can be expressed 
-\begin_inset Formula \begin{align*}
+\begin_inset Formula 
+\begin{align*}
 I(\theta) & =\mathbb{E}\left[\sum_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]\\
  & =\sum_{x\geq0}\sum_{k=1}^{k}l_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\\
- & =\sum_{x\geq0}\sum_{k=1}^{k}\frac{1}{l_{k}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\end{align*}
+ & =\sum_{x\geq0}\sum_{k=1}^{k}\frac{1}{l_{k}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}
+\end{align*}
 
 \end_inset
 
@@ -158,8 +173,10 @@ reference "eq:Likelihood of Poisson"
 \end_inset
 
 : 
-\begin_inset Formula \[
-\frac{\partial l_{k}}{\partial\theta}=\frac{l_{k}(x_{k}-\lambda_{k})}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta}\]
+\begin_inset Formula 
+\[
+\frac{\partial l_{k}}{\partial\theta}=\frac{l_{k}(x_{k}-\lambda_{k})}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta}
+\]
 
 \end_inset
 
@@ -167,25 +184,47 @@ And we get:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{align*}
+\begin_inset Formula 
+\begin{align*}
 I(\theta) & =\sum_{x\geq0}\sum_{k=1}^{k}\frac{l_{k}(x_{k}-\lambda_{k})^{2}}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\\
- & =\sum_{k=1}^{k}\frac{1}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\mathbb{E}_{k}\left[(x_{k}-\lambda_{k})^{2}\right]\end{align*}
+ & =\sum_{k=1}^{k}\frac{1}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\mathbb{E}_{k}\left[x_{k}^{2}-2x_{k}\lambda_{k}+\lambda_{k}{}^{2}\right]
+\end{align*}
 
 \end_inset
 
-for Poisson 
+but 
+\begin_inset Formula $\mathbb{E}_{k}\left[x_{k}^{2}\right]=\textrm{var}(x_{k})+\textrm{mean}(x_{k})^{2}$
+\end_inset
+
+ and for Poisson 
 \begin_inset Formula $\mathrm{var}(x)=\mathrm{mean}(x)=\lambda$
 \end_inset
 
  gives 
-\begin_inset Formula \[
-\mathbb{E}_{k}\left[(x_{k}-\lambda_{k})^{2}\right]=\lambda_{k}\]
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[x_{k}^{2}\right]=\lambda_{k}+\lambda_{k}^{2}
+\]
 
 \end_inset
 
 and 
-\begin_inset Formula \begin{equation}
-I(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\label{eq:Fisher Info for Poisson}\end{equation}
+\begin_inset Formula $\mathbb{E}_{k}\left[2x_{k}\lambda_{k}\right]=2\lambda_{k}^{2}$
+\end_inset
+
+ so 
+\begin_inset Formula 
+\[
+\mathbb{E}_{k}\left[x_{k}^{2}-2x_{k}\lambda_{k}+\lambda_{k}{}^{2}\right]=\lambda_{k}+\lambda_{k}^{2}-2\lambda_{k}^{2}+\lambda_{k}^{2}=\lambda_{k}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\begin{equation}
+I(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\label{eq:Fisher Info for Poisson}
+\end{equation}
 
 \end_inset
 
@@ -211,8 +250,10 @@ key "Ram2006"
 \end_inset
 
 
-\begin_inset Formula \[
-I(\theta)=\int\frac{1}{\lambda(x)}\left(\frac{\partial\lambda(x)}{\partial\theta}\right)^{2}dx\]
+\begin_inset Formula 
+\[
+I(\theta)=\int\frac{1}{\lambda(x)}\left(\frac{\partial\lambda(x)}{\partial\theta}\right)^{2}dx
+\]
 
 \end_inset
 
@@ -232,8 +273,10 @@ For likelihood dependent on parameter
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-l_{T}(\theta,\Lambda)=\prod_{k=1}^{K}\prod_{t=1}^{T}l_{k}(d,\Lambda_{t})p(\Lambda_{t})\]
+\begin_inset Formula 
+\[
+l_{T}(\theta,\Lambda)=\prod_{k=1}^{K}\prod_{t=1}^{T}l_{k}(d,\Lambda_{t})p(\Lambda_{t})
+\]
 
 \end_inset
 
@@ -241,8 +284,10 @@ l_{T}(\theta,\Lambda)=\prod_{k=1}^{K}\prod_{t=1}^{T}l_{k}(d,\Lambda_{t})p(\Lambd
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-\mathcal{L}_{T}(d,\Lambda)=\sum_{k=1}^{K}\sum_{t=1}^{T}\left[\log\left(l_{k}(d,\Lambda_{t})\right)+\log\left(p(\Lambda_{t})\right)\right]\]
+\begin_inset Formula 
+\[
+\mathcal{L}_{T}(d,\Lambda)=\sum_{k=1}^{K}\sum_{t=1}^{T}\left[\log\left(l_{k}(d,\Lambda_{t})\right)+\log\left(p(\Lambda_{t})\right)\right]
+\]
 
 \end_inset
 
@@ -255,8 +300,10 @@ as
 \end_inset
 
  then
-\begin_inset Formula \[
-\frac{\partial^{2}\mathcal{L}_{T}(d,\Lambda)}{\partial d^{2}}=\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}\]
+\begin_inset Formula 
+\[
+\frac{\partial^{2}\mathcal{L}_{T}(d,\Lambda)}{\partial d^{2}}=\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}
+\]
 
 \end_inset
 
@@ -271,9 +318,11 @@ reference "eq:Fisher Info Definition"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{alignat*}{1}
+\begin_inset Formula 
+\begin{alignat*}{1}
 I_{T}(\theta) & =-\mathbb{E}_{T}\left[\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}\right]=\sum_{t=1}^{T}-\mathbb{E}_{T}\left[\frac{\partial^{2}\mathcal{L}(d,\Lambda_{t})}{\partial d^{2}}\right]=\sum_{t=1}^{T}\mathbb{E}_{T}\left[\left(\frac{\partial\mathcal{L}(d,\Lambda_{t})}{\partial d}\right)^{2}\right]\\
- & =\sum_{t=1}^{T}\int_{\Lambda_{t}}p(\Lambda_{t})I(\theta)d\Lambda_{t}=\sum_{t,k}\int_{\Lambda_{t}}p(\Lambda_{t})\frac{1}{\lambda_{k}(\Lambda_{t})}\left(\frac{\partial\lambda_{k}(\Lambda_{t})}{\partial d}\right)^{2}d\Lambda_{t}\end{alignat*}
+ & =\sum_{t=1}^{T}\int_{\Lambda_{t}}p(\Lambda_{t})I(\theta)d\Lambda_{t}=\sum_{t,k}\int_{\Lambda_{t}}p(\Lambda_{t})\frac{1}{\lambda_{k}(\Lambda_{t})}\left(\frac{\partial\lambda_{k}(\Lambda_{t})}{\partial d}\right)^{2}d\Lambda_{t}
+\end{alignat*}
 
 \end_inset
 
@@ -319,8 +368,10 @@ For two sources separated by a distance
 \end_inset
 
  we have a mean value of the intensity:
-\begin_inset Formula \[
-\lambda=\Lambda_{1}f_{1}+\Lambda_{2}f_{2}\]
+\begin_inset Formula 
+\[
+\lambda=\Lambda_{1}f_{1}+\Lambda_{2}f_{2}
+\]
 
 \end_inset
 
@@ -346,8 +397,10 @@ For two sources separated by a distance
 \end_inset
 
  
-\begin_inset Formula \[
-\lambda(d)=\Lambda_{1}q(x-\frac{d}{2})+\Lambda_{2}q(x+\frac{d}{2})\]
+\begin_inset Formula 
+\[
+\lambda(d)=\Lambda_{1}q(x-\frac{d}{2})+\Lambda_{2}q(x+\frac{d}{2})
+\]
 
 \end_inset
 
@@ -361,8 +414,10 @@ where
 \end_inset
 
 )
-\begin_inset Formula \[
-\lambda_{k}(d)=\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx+\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx\]
+\begin_inset Formula 
+\[
+\lambda_{k}(d)=\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx+\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx
+\]
 
 \end_inset
 
@@ -374,8 +429,10 @@ key "Ram2006"
 \end_inset
 
 )
-\begin_inset Formula \begin{equation}
-I(d)=\frac{1}{4}\sum_{k=1}^{K}\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x-\frac{d}{2})dx-\Lambda_{2}\int_{C_{k}}\partial_{x}q(x+\frac{d}{2})dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx+\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx}\label{eq:Fisher Info Pixelised - Ram}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+I(d)=\frac{1}{4}\sum_{k=1}^{K}\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x-\frac{d}{2})dx-\Lambda_{2}\int_{C_{k}}\partial_{x}q(x+\frac{d}{2})dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx+\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx}\label{eq:Fisher Info Pixelised - Ram}
+\end{equation}
 
 \end_inset
 
@@ -461,9 +518,11 @@ reference "eq:Fisher Info Pixelised - Ram"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \begin{alignat*}{1}
+\begin_inset Formula 
+\begin{alignat*}{1}
 I(d) & =\frac{1}{4}\sum_{k=1}^{K}\left[\frac{\left(\Lambda_{1}\int_{C_{k}}\partial_{x}q(x-\frac{d}{2})dx\right)^{2}}{\Lambda_{1}\int_{C_{k}}q(x-\frac{d}{2})dx}+\frac{\left(\Lambda_{2}\int_{C_{k}}\partial_{x}q(x+\frac{d}{2})dx\right)^{2}}{\Lambda_{2}\int_{C_{k}}q(x+\frac{d}{2})dx}\right]\\
- & =\frac{1}{4}\sum_{k=1}^{K}\frac{\left(\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\int_{C_{k}}q(x)dx}\left[\Lambda_{1}+\Lambda_{2}\right]\end{alignat*}
+ & =\frac{1}{4}\sum_{k=1}^{K}\frac{\left(\int_{C_{k}}\partial_{x}q(x)dx\right)^{2}}{\int_{C_{k}}q(x)dx}\left[\Lambda_{1}+\Lambda_{2}\right]
+\end{alignat*}
 
 \end_inset
 
@@ -557,8 +616,10 @@ For two sources
 \end_inset
 
  is given by 
-\begin_inset Formula \[
-\textrm{var}(d)=\textrm{var}(\bm{a}^{T}\cdot\bm{c})=\bm{a}^{T}\cdot\bm{Q}\cdot\bm{a}=Q_{11}+Q_{22}-2Q_{12}\]
+\begin_inset Formula 
+\[
+\textrm{var}(d)=\textrm{var}(\bm{a}^{T}\cdot\bm{c})=\bm{a}^{T}\cdot\bm{Q}\cdot\bm{a}=Q_{11}+Q_{22}-2Q_{12}
+\]
 
 \end_inset
 
@@ -579,10 +640,13 @@ For two sources
 \end_inset
 
 ) 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \bm{I}(\theta)=\left(\begin{array}{cc}
 I_{11} & I_{12}\\
-I_{12} & I_{22}\end{array}\right)\]
+I_{12} & I_{22}
+\end{array}\right)
+\]
 
 \end_inset
 
@@ -594,8 +658,10 @@ reference "eq:Fisher Info for Poisson"
 \end_inset
 
  
-\begin_inset Formula \[
-I_{ij}(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta_{i}}\frac{\partial\lambda_{k}}{\partial\theta_{j}}\]
+\begin_inset Formula 
+\[
+I_{ij}(\theta)=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta_{i}}\frac{\partial\lambda_{k}}{\partial\theta_{j}}
+\]
 
 \end_inset
 
@@ -604,10 +670,13 @@ The covariance matrix
 \end_inset
 
  is then 
-\begin_inset Formula \[
+\begin_inset Formula 
+\[
 \bm{Q}=\bm{I}^{-1}(\theta)=\frac{1}{I_{11}I_{12}-I_{12}^{2}}\left(\begin{array}{cc}
 I_{22} & -I_{12}\\
--I_{12} & I_{11}\end{array}\right)\]
+-I_{12} & I_{11}
+\end{array}\right)
+\]
 
 \end_inset
 
@@ -616,14 +685,18 @@ and the variance of
 \end_inset
 
  
-\begin_inset Formula \begin{equation}
-\textrm{var}(d)=\frac{I_{11}+I_{22}+2I_{12}}{I_{11}I_{12}-I_{12}^{2}}\label{eq:variance alternative}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+\textrm{var}(d)=\frac{I_{11}+I_{22}+2I_{12}}{I_{11}I_{12}-I_{12}^{2}}\label{eq:variance alternative}
+\end{equation}
 
 \end_inset
 
 The individual terms of the Fisher Information matrix 
-\begin_inset Formula \[
-I_{11}=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial c_{1}}\right)^{2}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x-c_{1})\right)^{2}}{\Lambda_{1}q_{k}(x-c_{1})+\Lambda_{2}q_{k}(x-c_{2})}\]
+\begin_inset Formula 
+\[
+I_{11}=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial c_{1}}\right)^{2}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x-c_{1})\right)^{2}}{\Lambda_{1}q_{k}(x-c_{1})+\Lambda_{2}q_{k}(x-c_{2})}
+\]
 
 \end_inset
 
@@ -644,8 +717,10 @@ where
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-I_{11}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x)\right)^{2}}{\Lambda_{1}q_{k}(x)+\Lambda_{2}q_{k}(x+d)}\]
+\begin_inset Formula 
+\[
+I_{11}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x)\right)^{2}}{\Lambda_{1}q_{k}(x)+\Lambda_{2}q_{k}(x+d)}
+\]
 
 \end_inset
 
@@ -654,8 +729,10 @@ where
 \end_inset
 
  and 
-\begin_inset Formula \[
-I_{22}=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}q'_{k}(x)\right)^{2}}{\Lambda_{2}q_{k}(x)+\Lambda_{1}q_{k}(x-d)}\]
+\begin_inset Formula 
+\[
+I_{22}=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}q'_{k}(x)\right)^{2}}{\Lambda_{2}q_{k}(x)+\Lambda_{1}q_{k}(x-d)}
+\]
 
 \end_inset
 
@@ -668,8 +745,10 @@ For symmetrical PSF
 \end_inset
 
  we have 
-\begin_inset Formula \begin{equation}
-I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q'_{k}(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}\label{eq:Fisher Information alternative - Individual}\end{equation}
+\begin_inset Formula 
+\begin{equation}
+I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q'_{k}(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}\label{eq:Fisher Information alternative - Individual}
+\end{equation}
 
 \end_inset
 
@@ -678,8 +757,10 @@ And the cross term (
 \end_inset
 
 ) 
-\begin_inset Formula \[
-I_{ij}=\sum_{k=1}^{K}\frac{\Lambda_{i}\Lambda_{j}q'_{k}(x)q'_{k}(x-d)}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}\]
+\begin_inset Formula 
+\[
+I_{ij}=\sum_{k=1}^{K}\frac{\Lambda_{i}\Lambda_{j}q'_{k}(x)q'_{k}(x-d)}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}
+\]
 
 \end_inset
 
@@ -700,9 +781,11 @@ For
 \end_inset
 
  we have
-\begin_inset Formula \begin{alignat*}{1}
+\begin_inset Formula 
+\begin{alignat*}{1}
 I_{ii} & =\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}S(0)\\
-I_{ij} & =\frac{\Lambda_{i}\Lambda_{j}}{\Lambda_{i}+\Lambda_{j}}S(0)\end{alignat*}
+I_{ij} & =\frac{\Lambda_{i}\Lambda_{j}}{\Lambda_{i}+\Lambda_{j}}S(0)
+\end{alignat*}
 
 \end_inset
 
@@ -727,8 +810,10 @@ reference "eq:variance alternative"
 \end_inset
 
  
-\begin_inset Formula \[
-p=I_{11}+I_{22}+2I_{12}=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}^{2}+\Lambda_{2}^{2}+2\Lambda_{1}\Lambda_{2})=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}+\Lambda_{2})^{2}\]
+\begin_inset Formula 
+\[
+p=I_{11}+I_{22}+2I_{12}=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}^{2}+\Lambda_{2}^{2}+2\Lambda_{1}\Lambda_{2})=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}+\Lambda_{2})^{2}
+\]
 
 \end_inset
 
@@ -748,8 +833,10 @@ reference "eq:variance alternative"
 \end_inset
 
  
-\begin_inset Formula \begin{eqnarray*}
-r=\det\left[\bm{I}(\theta)\right]=I_{11}I_{22}-I_{12}^{2}=\frac{S^{2}(0)}{\left(\Lambda_{1}+\Lambda_{2}\right)^{2}}\left(\Lambda_{1}^{2}\Lambda_{2}^{2}-(\Lambda_{1}\Lambda_{2})^{2}\right) & \equiv & 0\ \text{for any }\Lambda_{i}\end{eqnarray*}
+\begin_inset Formula 
+\begin{eqnarray*}
+r=\det\left[\bm{I}(\theta)\right]=I_{11}I_{22}-I_{12}^{2}=\frac{S^{2}(0)}{\left(\Lambda_{1}+\Lambda_{2}\right)^{2}}\left(\Lambda_{1}^{2}\Lambda_{2}^{2}-(\Lambda_{1}\Lambda_{2})^{2}\right) & \equiv & 0\ \text{for any }\Lambda_{i}
+\end{eqnarray*}
 
 \end_inset
 
@@ -800,8 +887,10 @@ The cross term
 \end_inset
 
  and we get f
-\begin_inset Formula \[
-\textrm{var}(d)=\frac{1}{I_{11}}+\frac{1}{I_{22}}\]
+\begin_inset Formula 
+\[
+\textrm{var}(d)=\frac{1}{I_{11}}+\frac{1}{I_{22}}
+\]
 
 \end_inset
 
@@ -809,8 +898,10 @@ and
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula \[
-I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q_{k}'(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}=\Lambda_{i}\sum_{k=1}^{K}\frac{\left(q_{k}'(x)\right)^{2}}{q_{k}(x)}=2\Lambda_{i}S(0)\]
+\begin_inset Formula 
+\[
+I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q_{k}'(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}=\Lambda_{i}\sum_{k=1}^{K}\frac{\left(q_{k}'(x)\right)^{2}}{q_{k}(x)}=2\Lambda_{i}S(0)
+\]
 
 \end_inset
 
@@ -871,9 +962,11 @@ key "Zhang2007"
 \end_inset
 
 :
-\begin_inset Formula \begin{alignat*}{1}
+\begin_inset Formula 
+\begin{alignat*}{1}
 I(d\rightarrow\infty) & =\frac{\Lambda}{\sigma^{2}}\\
-\textrm{var}(d\rightarrow\infty) & =\frac{\sigma^{2}}{\Lambda}\end{alignat*}
+\textrm{var}(d\rightarrow\infty) & =\frac{\sigma^{2}}{\Lambda}
+\end{alignat*}
 
 \end_inset
 
