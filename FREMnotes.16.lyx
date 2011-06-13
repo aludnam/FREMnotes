@@ -41,6 +41,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -179,7 +180,7 @@ for Poisson
 
  gives 
 \begin_inset Formula \[
-\mathbb{E}_{k}\left[(x_{k}-\lambda_{k})^{2}\right]=\lambda_{k}\]
+\mathbb{E}_{k}\left[(x_{k}-\lambda_{k})^{2}\right]=\textrm{var}(x_{k})=\lambda_{k}\]
 
 \end_inset
 
@@ -278,6 +279,123 @@ I_{T}(\theta) & =-\mathbb{E}_{T}\left[\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Time distriburion of the intensities - integrating out 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+l_{k}(\theta)=\int_{\Lambda}l_{k}(\theta,\Lambda)d\Lambda=\int_{\Lambda}l_{k}(\theta|\Lambda)p(\Lambda)d\Lambda\]
+
+\end_inset
+
+for four state model of two sources: 
+\begin_inset Formula $\left\{ (\Lambda_{1},\Lambda_{2}),(\Lambda_{1},0),(0,\Lambda_{2}),(0,0)\right\} $
+\end_inset
+
+: 
+\begin_inset Formula $\lambda^{1}=\Lambda_{1}q(x-c_{1})+\Lambda_{2}q(x-c_{2})$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda^{2}=\Lambda_{1}q(x-c_{1})$
+\end_inset
+
+, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\lambda^{3}=\Lambda_{2}q(x-c_{2})$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda^{4}=0$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+\lang british
+ with uniform distributinoi over these states
+\begin_inset Formula \[
+l_{k}(\theta)=\frac{1}{4}\sum_{i=1}^{4}\mathrm{Po}(\lambda_{k}^{i})\]
+
+\end_inset
+
+derivatives 
+\begin_inset Formula \[
+\frac{\partial l_{k}}{\partial c_{p}}=\frac{1}{4}\sum_{i}\frac{\partial\mathrm{Po}(\lambda_{k}^{i})}{\partial c_{p}}=\frac{1}{4}\sum_{i}\left(\mathrm{Po}(\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Fisher information matrix entries:
+\begin_inset Formula \begin{alignat}{1}
+I_{pp}(\theta) & =\mathbb{E}\left[\left(\sum_{k=1}^{N}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial c_{p}}\right)^{2}\right]\nonumber \\
+ & =\mathbb{E}\left[\left\{ \sum_{k=1}^{N}\left(\frac{1}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})}\frac{\partial\sum_{i=1}^{4}\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}\right)\right\} \left\{ \sum_{l=1}^{N}\left(\frac{1}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{l}^{j})}\frac{\partial\sum_{i=1}^{4}\textrm{Po}(\textrm{\lambda}_{l}^{i})}{\partial c_{p}}\right)\right\} \right]\nonumber \\
+ & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}\right)^{2}}{\left(\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})\right)^{2}}\right]\label{eq:Fisher Info Integrated Out}\end{alignat}
+
+\end_inset
+
+as the cross terms (
+\begin_inset Formula $k,\, l$
+\end_inset
+
+) in the sum (2nd row) are zeros: 
+\begin_inset Formula \begin{alignat*}{1}
+\mathbb{E}\left[\left(\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})}\right)\left(\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{l}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{l}^{j})}\right)\right] & =\mathbb{E}_{k}\left[\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})}\right]\mathbb{E}_{l}\left[\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{l}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{l}^{j})}\right]\\
+ & =\sum_{i=1}^{4}\frac{\partial}{\partial c_{p}}\left(\sum_{x_{k}\geq0}\textrm{Po}(\textrm{\lambda}_{k}^{i})\right)\sum_{i=1}^{4}\frac{\partial}{\partial c_{p}}\left(\sum_{x_{k}\geq0}\textrm{Po}(\textrm{\lambda}_{l}^{i})\right)\\
+ & =0\end{alignat*}
+
+\end_inset
+
+Expressing the derivatives and the expectation from Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info Integrated Out"
+
+\end_inset
+
+:
+\begin_inset Formula \begin{alignat*}{1}
+I_{pp}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=1}^{4}\left(\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)}{\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})}\right\} ^{2}\right]\\
+ & =\frac{1}{4}\sum_{k=1}^{N}\sum_{x_{k}\geq0}\frac{\left\{ \sum_{i=1}^{4}\left(\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)\right\} ^{2}}{\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})}\end{alignat*}
+
+\end_inset
+
+The simple approximation is to get rid of the 
+\begin_inset Formula $\text{Po}(x_{k};\lambda_{k}^{i})$
+\end_inset
+
+
+\begin_inset Formula \[
+I_{pp}(\theta)=\frac{1}{4}\sum_{k=1}^{N}\mathbb{E}_{k}\left[\left(\sum_{i=1}^{4}\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)^{2}\right]\]
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
