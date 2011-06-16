@@ -1150,7 +1150,7 @@ For the four states model we have
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-I_{pp}(\theta) & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=\{p,3,4\}}\left(\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})}\right\} ^{2}\right]
+I_{pp}(\theta) & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=\{p,3\}}\left(\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})}\right\} ^{2}\right]
 \end{alignat*}
 
 \end_inset
@@ -1164,22 +1164,98 @@ The Fisher information matrix off-diagonal entries:
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{1}
-I_{pq}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}\right)\left(\sum_{l=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{l})}{\partial c_{q}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})\right)^{2}}\right]\\
- & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)\left(\frac{\partial\lambda_{k}^{q}}{\partial c_{q}}\right)\mathbb{E}_{k}\left[\frac{\left(\sum_{i=\{p,3,4\}}\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)\left(\sum_{i=\{q,3,4\}}\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})\right)^{2}}\right]
-\end{alignat*}
-
-\end_inset
-
-
-\begin_inset Formula 
 \begin{alignat}{1}
-I_{pq}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}\right)\left(\sum_{l=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{l})}{\partial c_{q}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})\right)^{2}}\right]\label{eq:Fisher Info Integrated Out-off diagonal entries}
+I_{pq}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}\right)\left(\sum_{l=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{l})}{\partial c_{q}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})\right)^{2}}\right]\nonumber \\
+ & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)\left(\frac{\partial\lambda_{k}^{q}}{\partial c_{q}}\right)\mathbb{E}_{k}\left[\frac{\left(\sum_{i=\{p,3\}}\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)\left(\sum_{i=\{q,3\}}\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})\right)^{2}}\right]\label{eq:Fisher Info Integrated Out-off diagonal entries}
 \end{alignat}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Limit 
+\begin_inset Formula $d\rightarrow\infty$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For sources far away (
+\begin_inset Formula $\lambda^{1}(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda^{2}(x)$
+\end_inset
+
+ do not have common support): 
+\begin_inset Formula $\text{Po}(\lambda^{3})=\text{Po}(\lambda^{1}+\lambda^{2})=\text{Po}(\lambda^{1})+\text{Po}(\lambda^{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial\lambda^{p}}{\partial c_{q}}=0,\: p\neq q$
+\end_inset
+
+.
+ From Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info Integrated Out - diagonal entries"
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{alignat*}{1}
+I_{pp} & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(2\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\partial c_{p}}\right)^{2}}{\left(2\textrm{Po}(\lambda_{k}^{p})+2\textrm{Po}(\lambda_{k}^{q})\right)^{2}}\right]\\
+ & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\partial c_{p}}\right)^{2}}{\left(\textrm{Po}(\lambda_{k}^{p})\right)^{2}}\right]\\
+ & =\sum_{k=1}^{N}\left(\frac{1}{\lambda_{k}^{p}}\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left(x_{k}-\lambda_{k}^{p}\right)^{2}\right]\\
+ & =\sum_{k=1}^{N}\frac{1}{\lambda_{k}^{p}}\left(\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}
+\end{alignat*}
+
+\end_inset
+
+which is the Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info for Poisson"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The off-diagonal entries: 
+\begin_inset Formula 
+\[
+I_{pq}=0
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula 
+\[
+\frac{\partial\text{Po}(\lambda^{p})}{\partial c_{p}}\frac{\partial\text{Po}(\lambda^{q})}{\partial c_{q}}=0
+\]
+
+\end_inset
+
+ because 
+\begin_inset Formula $\lambda^{p}(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda^{q}(x)$
+\end_inset
+
+ do not have common support.
+ 
 \end_layout
 
 \begin_layout Standard
