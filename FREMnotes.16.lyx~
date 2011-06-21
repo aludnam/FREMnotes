@@ -71,7 +71,7 @@ Fisher Information for a Poisson variable
 \begin_layout Standard
 This is derivation of the fisher information for Poisson distributed variable
  
-\begin_inset Formula $X_{k}$
+\begin_inset Formula $X$
 \end_inset
 
  with mean 
@@ -84,7 +84,7 @@ This is derivation of the fisher information for Poisson distributed variable
 \begin_layout Standard
 \begin_inset Formula 
 \[
-X_{k}\sim\textrm{Po}(x_{k},\lambda_{k}(\theta))=\frac{\lambda_{k}^{x_{k}}e^{-\lambda_{k}}}{x_{k}!}
+X\sim\textrm{Po}(n,\lambda)=p(n|\theta)=\frac{\lambda^{n}e^{-\lambda}}{n!}
 \]
 
 \end_inset
@@ -97,23 +97,34 @@ Likelihood
 \end_layout
 
 \begin_layout Standard
-Likelihood of the Poisson distributed variable with detection in K pixels:
- 
+Likelihood of the Poisson distributed variable with detection 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ in K pixels: 
 \begin_inset Formula 
 \begin{equation}
-l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{x_{k}}(\theta)e^{-\lambda_{k}(\theta)}}{x_{k}!}\label{eq:Likelihood of Poisson}
+l(\theta)=\prod_{k=1}^{K}l_{k}=\prod_{k=1}^{K}\frac{\lambda_{k}^{n_{k}}e^{-\lambda_{k}}}{n_{k}!}\label{eq:Likelihood of Poisson}
 \end{equation}
 
 \end_inset
 
+where 
+\begin_inset Formula $l_{k}(\theta)=p(n_{k}|\theta)$
+\end_inset
 
+ to emphesize the dependecy on the parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 Log-Likelihood:
 \begin_inset Formula 
 \[
-\mathcal{L}=\sum_{k}\left(x_{k}\log\lambda_{k}-\lambda_{k}-\log x_{k}\right)
+\mathcal{L}=\sum_{k}\left(n_{k}\log\lambda_{k}-\lambda_{k}-\log n_{k}!\right)
 \]
 
 \end_inset
@@ -147,7 +158,7 @@ I(\theta) & =\mathbb{E}\left[\left(\sum_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{
 \end_inset
 
 as 
-\begin_inset Formula $x_{k}$
+\begin_inset Formula $n_{k}$
 \end_inset
 
  are iid then the second term can be expressed as 
@@ -164,7 +175,7 @@ as
 where
 \begin_inset Formula 
 \[
-\mathbb{E}_{k}\left[f(x_{k})\right]=\int l_{k}f(x_{k})dx_{k}
+\mathbb{E}_{k}\left[f(n_{k})\right]=\sum_{n_{k}\geq0}p(n_{k}|\theta)f(n_{k})
 \]
 
 \end_inset
@@ -172,17 +183,22 @@ where
 But 
 \begin_inset Formula 
 \[
-\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]=\sum_{x}l_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}=\sum_{x}\frac{\partial l_{k}}{\partial\theta}=\frac{\partial\sum_{x}l_{k}}{\partial\theta}=0
+\mathbb{E}_{k}\left[\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}\right]=\sum_{n_{k}}l_{k}\frac{1}{l_{k}}\frac{\partial l_{k}}{\partial\theta}=\sum_{n_{k}}\frac{\partial l_{k}}{\partial\theta}=\frac{\partial\sum_{n_{k}}l_{k}}{\partial\theta}=0
 \]
 
 \end_inset
 
-And so the Fisher Information can be expressed 
+as 
+\begin_inset Formula $\sum_{n_{k}}l_{k}=\sum_{n_{k}}p(n_{k}|\theta)=1$
+\end_inset
+
+.
+ The Fisher Information can then be expressed 
 \begin_inset Formula 
 \begin{align*}
 I(\theta) & =\mathbb{E}\left[\sum_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\right]\\
- & =\sum_{x\geq0}\sum_{k=1}^{k}l_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\\
- & =\sum_{x\geq0}\sum_{k=1}^{k}\frac{1}{l_{k}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}
+ & =\sum_{k=1}^{k}\sum_{n_{k}\geq0}l_{k}\frac{1}{l_{k}^{2}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}\\
+ & =\sum_{k=1}^{k}\sum_{n_{k}\geq0}\frac{1}{l_{k}}\left(\frac{\partial l_{k}}{\partial\theta}\right)^{2}
 \end{align*}
 
 \end_inset
@@ -197,7 +213,7 @@ reference "eq:Likelihood of Poisson"
 : 
 \begin_inset Formula 
 \[
-\frac{\partial l_{k}}{\partial\theta}=\frac{l_{k}(x_{k}-\lambda_{k})}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta}
+\frac{\partial l_{k}}{\partial\theta}=\frac{l_{k}(n_{k}-\lambda_{k})}{\lambda_{k}}\frac{\partial\lambda_{k}}{\partial\theta}
 \]
 
 \end_inset
@@ -208,20 +224,20 @@ And we get:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-I(\theta) & =\sum_{x\geq0}\sum_{k=1}^{k}\frac{l_{k}(x_{k}-\lambda_{k})^{2}}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\\
- & =\sum_{k=1}^{k}\frac{1}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\mathbb{E}_{k}\left[(x_{k}-\lambda_{k})^{2}\right]
+I(\theta) & =\sum_{k=1}^{k}\sum_{n_{k}\geq0}\frac{l_{k}(n_{k}-\lambda_{k})^{2}}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\\
+ & =\sum_{k=1}^{k}\frac{1}{\lambda_{k}^{2}}\left(\frac{\partial\lambda_{k}}{\partial\theta}\right)^{2}\mathbb{E}_{k}\left[(n_{k}-\lambda_{k})^{2}\right]
 \end{align*}
 
 \end_inset
 
 for Poisson 
-\begin_inset Formula $\mathrm{var}(x)=\mathrm{mean}(x)=\lambda$
+\begin_inset Formula $\mathrm{var}(n)=\mathrm{mean}(n)=\lambda$
 \end_inset
 
  gives 
 \begin_inset Formula 
 \[
-\mathbb{E}_{k}\left[(x_{k}-\lambda_{k})^{2}\right]=\textrm{var}(x_{k})=\lambda_{k}
+\mathbb{E}_{k}\left[(n_{k}-\lambda_{k})^{2}\right]=\textrm{var}(n_{k})=\lambda_{k}
 \]
 
 \end_inset
@@ -632,20 +648,30 @@ and the variance of
 The individual terms of the Fisher Information matrix 
 \begin_inset Formula 
 \[
-I_{11}=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial c_{1}}\right)^{2}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x-c_{1})\right)^{2}}{\Lambda_{1}q_{k}(x-c_{1})+\Lambda_{2}q_{k}(x-c_{2})}
+I_{11}=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\partial c_{1}}\right)^{2}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(c_{1})\right)^{2}}{\Lambda_{1}q_{k}(c_{1})+\Lambda_{2}q_{k}(c_{2})}
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $q_{k}(x)=\int_{C_{k}}q(x)dx$
+where
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{2}
+q_{k}(c) & =\int_{C_{k}}q(x-c)dx & ,\ (q_{k}(0)=q_{k})\\
+q'_{k}(c) & =\int_{C_{k}}\frac{\partial q(x-c)}{\partial x}dx & ,\ (q'_{k}(0)=q'_{k})
+\end{alignat*}
+
 \end_inset
 
- and 
-\begin_inset Formula $q'_{k}(x)=\int_{C_{k}}\frac{\partial q(x)}{\partial x}dx$
+
+\begin_inset Formula 
+\[
+\]
+
 \end_inset
 
-.
  If this keeps translational invariance (non-pixelised version does as 
 \begin_inset Formula $\int_{\mathbb{R}}g(x+c)dx=\int_{\mathbb{R}}g(x)dx$
 \end_inset
@@ -656,7 +682,7 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \[
-I_{11}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}(x)\right)^{2}}{\Lambda_{1}q_{k}(x)+\Lambda_{2}q_{k}(x+d)}
+I_{11}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}\right)^{2}}{\Lambda_{1}q_{k}+\Lambda_{2}q_{k}(-d)}
 \]
 
 \end_inset
@@ -668,7 +694,7 @@ where
  and 
 \begin_inset Formula 
 \[
-I_{22}=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}q'_{k}(x)\right)^{2}}{\Lambda_{2}q_{k}(x)+\Lambda_{1}q_{k}(x-d)}
+I_{22}=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}q'_{k}\right)^{2}}{\Lambda_{2}q_{k}+\Lambda_{1}q_{k}(d)}
 \]
 
 \end_inset
@@ -680,7 +706,7 @@ For symmetrical PSF
  we have 
 \begin_inset Formula 
 \begin{equation}
-I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q'_{k}(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}\label{eq:Fisher Information alternative - Individual}
+I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q'_{k}\right)^{2}}{\Lambda_{i}q_{k}+\Lambda_{j}q_{k}(d)}\label{eq:Fisher Information alternative - Individual}
 \end{equation}
 
 \end_inset
@@ -692,7 +718,7 @@ And the cross term (
 ) 
 \begin_inset Formula 
 \[
-I_{ij}=\sum_{k=1}^{K}\frac{\Lambda_{i}\Lambda_{j}q'_{k}(x)q'_{k}(x-d)}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}
+I_{ij}=\sum_{k=1}^{K}\frac{\Lambda_{i}\Lambda_{j}q'_{k}q'_{k}(d)}{\Lambda_{i}q_{k}+\Lambda_{j}q_{k}(d)}
 \]
 
 \end_inset
@@ -723,7 +749,7 @@ I_{ij} & =\frac{\Lambda_{i}\Lambda_{j}}{\Lambda_{i}+\Lambda_{j}}S(0)
 \end_inset
 
 where 
-\begin_inset Formula $S(d)=\sum_{k=1}^{K}\frac{\left(q'_{k}(x)\right)^{2}}{q_{k}(x)+q_{k}(x-d)}$
+\begin_inset Formula $S(d)=\sum_{k=1}^{K}\frac{\left(q'_{k}\right)^{2}}{q_{k}+q_{k}(d)}$
 \end_inset
 
 .
@@ -833,7 +859,7 @@ and
 \begin_layout Standard
 \begin_inset Formula 
 \[
-I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q_{k}'(x)\right)^{2}}{\Lambda_{i}q_{k}(x)+\Lambda_{j}q_{k}(x-d)}=\Lambda_{i}\sum_{k=1}^{K}\frac{\left(q_{k}'(x)\right)^{2}}{q_{k}(x)}=2\Lambda_{i}S(0)
+I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q_{k}'\right)^{2}}{\Lambda_{i}q_{k}+\Lambda_{j}q_{k}(d)}=\Lambda_{i}\sum_{k=1}^{K}\frac{\left(q_{k}'\right)^{2}}{q_{k}}=2\Lambda_{i}S(0)
 \]
 
 \end_inset
@@ -962,7 +988,7 @@ For likelihood dependent on parameter
 \begin_layout Standard
 \begin_inset Formula 
 \[
-l_{T}(\theta,\Lambda)=\prod_{k=1}^{K}\prod_{t=1}^{T}l_{k}(d,\Lambda_{t})p(\Lambda_{t})
+l_{T}(d,\Lambda)=\prod_{k=1}^{K}\prod_{t=1}^{T}p(n_{k}|d,\Lambda_{t})p(\Lambda_{t})
 \]
 
 \end_inset
@@ -1027,7 +1053,7 @@ Time distriburion of the intensities - integrating out
 \begin_layout Standard
 \begin_inset Formula 
 \[
-l_{k}(\theta)=\int_{\Lambda}l_{k}(\theta,\Lambda)d\Lambda=\int_{\Lambda}l_{k}(\theta|\Lambda)p(\Lambda)d\Lambda
+l_{k}(d)=\int_{\Lambda}l_{k}(d,\Lambda)d\Lambda=\int_{\Lambda}p(n_{k}|d,\Lambda)p(\Lambda)d\Lambda
 \]
 
 \end_inset
@@ -1083,7 +1109,7 @@ l_{k}(\theta)=\frac{1}{4}\sum_{i=1}^{4}\mathrm{Po}(\lambda_{k}^{i})
 derivatives 
 \begin_inset Formula 
 \[
-\frac{\partial l_{k}}{\partial c_{p}}=\frac{1}{4}\sum_{i}\frac{\partial\mathrm{Po}(\lambda_{k}^{i})}{\partial c_{p}}=\frac{1}{4}\sum_{i}\left(\mathrm{Po}(\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)
+\frac{\partial l_{k}}{\partial c_{p}}=\frac{1}{4}\sum_{i}\frac{\partial\mathrm{Po}(\lambda_{k}^{i})}{\partial c_{p}}=\frac{1}{4}\sum_{i}\left(\mathrm{Po}(\lambda_{k}^{i})\frac{(n_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)
 \]
 
 \end_inset
@@ -1106,7 +1132,7 @@ as the cross terms (
 \begin_inset Formula 
 \begin{alignat*}{1}
 \mathbb{E}\left[\left(\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})}\right)\left(\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{l}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{l}^{j})}\right)\right] & =\mathbb{E}_{k}\left[\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})}\right]\mathbb{E}_{l}\left[\frac{\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{l}^{i})}{\partial c_{p}}}{\sum_{j=1}^{4}\textrm{Po}(\lambda_{l}^{j})}\right]\\
- & =\sum_{i=1}^{4}\frac{\partial}{\partial c_{p}}\left(\sum_{x_{k}\geq0}\textrm{Po}(\textrm{\lambda}_{k}^{i})\right)\sum_{i=1}^{4}\frac{\partial}{\partial c_{p}}\left(\sum_{x_{k}\geq0}\textrm{Po}(\textrm{\lambda}_{l}^{i})\right)\\
+ & =\sum_{i=1}^{4}\frac{\partial}{\partial c_{p}}\left(\sum_{n_{k}\geq0}\textrm{Po}(\textrm{\lambda}_{k}^{i})\right)\sum_{i=1}^{4}\frac{\partial}{\partial c_{p}}\left(\sum_{n_{k}\geq0}\textrm{Po}(\textrm{\lambda}_{l}^{i})\right)\\
  & =0
 \end{alignat*}
 
@@ -1122,8 +1148,8 @@ reference "eq:Fisher Info Integrated Out - diagonal entries"
 :
 \begin_inset Formula 
 \begin{alignat*}{1}
-I_{pp}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=1}^{4}\left(\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)}{\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})}\right\} ^{2}\right]\\
- & =\frac{1}{4}\sum_{k=1}^{N}\sum_{x_{k}\geq0}\frac{\left\{ \sum_{i=1}^{4}\left(\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)\right\} ^{2}}{\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})}
+I_{pp}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=1}^{4}\left(\mathrm{Po}(n_{k};\lambda_{k}^{i})\frac{(n_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)}{\sum_{j=1}^{4}\textrm{Po}(n_{k};\lambda_{k}^{j})}\right\} ^{2}\right]\\
+ & =\frac{1}{4}\sum_{k=1}^{N}\sum_{n_{k}\geq0}\frac{\left\{ \sum_{i=1}^{4}\left(\mathrm{Po}(n_{k};\lambda_{k}^{i})\frac{(n_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\frac{\partial\lambda_{k}^{i}}{\partial c_{p}}\right)\right\} ^{2}}{\sum_{j=1}^{4}\textrm{Po}(n_{k};\lambda_{k}^{j})}
 \end{alignat*}
 
 \end_inset
@@ -1150,7 +1176,7 @@ For the four states model we have
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
-I_{pp}(\theta) & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=\{p,3\}}\left(\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})}\right\} ^{2}\right]
+I_{pp}(\theta) & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=\{p,3\}}\left(\mathrm{Po}(n_{k};\lambda_{k}^{i})\frac{(n_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\sum_{j=1}^{4}\textrm{Po}(n_{k};\lambda_{k}^{j})}\right\} ^{2}\right]
 \end{alignat*}
 
 \end_inset
@@ -1166,7 +1192,7 @@ The Fisher information matrix off-diagonal entries:
 \begin_inset Formula 
 \begin{alignat}{1}
 I_{pq}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\sum_{i=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{i})}{\partial c_{p}}\right)\left(\sum_{l=1}^{4}\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{l})}{\partial c_{q}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(\lambda_{k}^{j})\right)^{2}}\right]\nonumber \\
- & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)\left(\frac{\partial\lambda_{k}^{q}}{\partial c_{q}}\right)\mathbb{E}_{k}\left[\frac{\left(\sum_{i=\{p,3\}}\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)\left(\sum_{i=\{q,3\}}\mathrm{Po}(x_{k};\lambda_{k}^{i})\frac{(x_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(x_{k};\lambda_{k}^{j})\right)^{2}}\right]\label{eq:Fisher Info Integrated Out-off diagonal entries}
+ & =\sum_{k=1}^{N}\left(\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)\left(\frac{\partial\lambda_{k}^{q}}{\partial c_{q}}\right)\mathbb{E}_{k}\left[\frac{\left(\sum_{i=\{p,3\}}\mathrm{Po}(n_{k};\lambda_{k}^{i})\frac{(n_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)\left(\sum_{i=\{q,3\}}\mathrm{Po}(n_{k};\lambda_{k}^{i})\frac{(n_{k}-\lambda_{k}^{i})}{\lambda_{k}^{i}}\right)}{\left(\sum_{j=1}^{4}\textrm{Po}(n_{k};\lambda_{k}^{j})\right)^{2}}\right]\label{eq:Fisher Info Integrated Out-off diagonal entries}
 \end{alignat}
 
 \end_inset
@@ -1201,7 +1227,7 @@ Sources are far apart and
 \end_inset
 
  and 
-\begin_inset Formula $\text{Po}(x_{k'},\lambda_{k'}^{3})=\text{Po}(x_{k'},\lambda_{k'}^{1})+\text{Po}(x_{k'},\lambda_{k'}^{2}=0)=\text{Po}(x_{k'},\lambda_{k'}^{1})+1$
+\begin_inset Formula $\text{Po}(n_{k'},\lambda_{k'}^{3})=\text{Po}(n_{k'},\lambda_{k'}^{1})+\text{Po}(n_{k'},\lambda_{k'}^{2}=0)=\text{Po}(n_{k'},\lambda_{k'}^{1})+1$
 \end_inset
 
 .
@@ -1221,8 +1247,8 @@ reference "eq:Fisher Info Integrated Out - diagonal entries"
 \begin_inset Formula 
 \begin{alignat*}{1}
 I_{pp} & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(2\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\partial c_{p}}\right)^{2}}{\left(2\textrm{Po}(\lambda_{k}^{p})+2\textrm{Po}(\lambda_{k}^{q})\right)^{2}}\right]\\
- & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\textrm{Po}(\textrm{\lambda}_{k}^{p})\frac{\left(x_{k}-\lambda_{k}^{p}\right)^{2}}{\lambda_{k}^{p}}\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)^{2}}{\left(\textrm{Po}(\lambda_{k}^{p})+1\right)^{2}}\right]\\
- & =\sum_{k=1}^{N}\left(\frac{1}{\lambda_{k}^{p}}\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left(x_{k}-\lambda_{k}^{p}\right)^{2}\left(\frac{\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\textrm{Po}(\textrm{\lambda}_{k}^{p})+1}\right)^{2}\right]
+ & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\textrm{Po}(\textrm{\lambda}_{k}^{p})\frac{\left(n_{k}-\lambda_{k}^{p}\right)^{2}}{\lambda_{k}^{p}}\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)^{2}}{\left(\textrm{Po}(\lambda_{k}^{p})+1\right)^{2}}\right]\\
+ & =\sum_{k=1}^{N}\left(\frac{1}{\lambda_{k}^{p}}\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left(n_{k}-\lambda_{k}^{p}\right)^{2}\left(\frac{\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\textrm{Po}(\textrm{\lambda}_{k}^{p})+1}\right)^{2}\right]
 \end{alignat*}
 
 \end_inset
