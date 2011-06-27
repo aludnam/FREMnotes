@@ -113,7 +113,7 @@ where
 \begin_inset Formula $l_{k}(\theta)=p(n_{k}|\theta)$
 \end_inset
 
- to emphesize the dependecy on the parameter 
+ to emphasise the dependency on the parameter 
 \begin_inset Formula $\theta$
 \end_inset
 
@@ -520,7 +520,7 @@ An alternative way to derive Fisher information for two sources separated
 This is a suggestion how to fix the problems with limits for Fisher Information
  derived above.
  This gives infinite variance when one of the sources is no present.
- Also fix weird behavior of the 
+ Also fix weird behaviour of the 
 \begin_inset Formula $I(d)$
 \end_inset
 
@@ -982,7 +982,7 @@ For likelihood dependent on parameter
 \begin_inset Formula $\Lambda_{t}$
 \end_inset
 
- (T different time slicese)
+ (T different time slices)
 \end_layout
 
 \begin_layout Standard
@@ -1043,7 +1043,7 @@ I_{T}(\theta) & =-\mathbb{E}_{T}\left[\sum_{t=1}^{T}\frac{\partial^{2}\mathcal{L
 \end_layout
 
 \begin_layout Subsection
-Time distriburion of the intensities - integrating out 
+Time distribution of the intensities - integrating out 
 \begin_inset Formula $\Lambda$
 \end_inset
 
@@ -1098,7 +1098,7 @@ for four state model of two sources:
 \noun default
 \color inherit
 \lang british
- with uniform distributinoi over these states
+ with uniform distribution over these states
 \begin_inset Formula 
 \[
 l_{k}(\theta)=\frac{1}{4}\sum_{i=1}^{4}\mathrm{Po}(\lambda_{k}^{i})
@@ -1202,6 +1202,48 @@ I_{pq}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\sum_{i=1}^{4}\f
 
 \begin_layout Paragraph
 Limit 
+\begin_inset Formula $d\rightarrow0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When 
+\begin_inset Formula $c^{1}=c^{2}$
+\end_inset
+
+ then 
+\begin_inset Formula $\lambda^{1}=\lambda^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{\partial\text{Po}(\lambda^{1})}{\partial c^{1}}=\frac{\partial\text{Po}(\lambda^{2})}{\partial c^{2}}$
+\end_inset
+
+.
+ Then all entries in 
+\begin_inset Formula $I_{pq}$
+\end_inset
+
+ are equal and the matrix is singular.
+ For the limit 
+\begin_inset Formula $d\rightarrow0$
+\end_inset
+
+ the determianat 
+\begin_inset Formula $\det(\bm{I})\rightarrow0$
+\end_inset
+
+ and the variance 
+\begin_inset Formula $\text{var}(d)\rightarrow\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Limit 
 \begin_inset Formula $d\rightarrow\infty$
 \end_inset
 
@@ -1243,7 +1285,7 @@ reference "eq:Fisher Info Integrated Out - diagonal entries"
 
 \end_inset
 
-
+ the diagonal elemets 
 \begin_inset Formula 
 \begin{alignat*}{1}
 I_{pp} & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(2\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\partial c_{p}}\right)^{2}}{\left(2\textrm{Po}(\lambda_{k}^{p})+2\textrm{Po}(\lambda_{k}^{q})\right)^{2}}\right]\\
@@ -1257,23 +1299,84 @@ For large
 \begin_inset Formula $\lambda_{k}^{p}$
 \end_inset
 
- the second term in the expectation is approximately one and 
+ the second term in the expectation is approximately one: 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\frac{\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\textrm{Po}(\textrm{\lambda}_{k}^{p})+1}=1-\frac{1}{1+\textrm{Po}(\textrm{\lambda}_{k}^{p})}\approx1$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang british
+ 
 \begin_inset Formula 
-\[
-I_{pp}=\frac{1}{2}\sum_{k=1}^{N}\frac{1}{\lambda_{k}^{p}}\left(\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}
-\]
+\begin{equation}
+I_{pp}\approx\frac{1}{2}\sum_{k=1}^{N}\frac{1}{\lambda_{k}^{p}}\left(\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}\label{eq: int out - approximation d to infty}
+\end{equation}
 
 \end_inset
 
- which is the Eq.
+which is the Eq.
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:Fisher Info for Poisson"
 
 \end_inset
 
-.
- 
+ (up to the factor 
+\begin_inset Formula $1/2$
+\end_inset
+
+).
+ As the the term is upper bounded by one: 
+\begin_inset Formula $\frac{\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\textrm{Po}(\textrm{\lambda}_{k}^{p})+1}=1-\frac{1}{1+\textrm{Po}(\textrm{\lambda}_{k}^{p})}<1$
+\end_inset
+
+ the terms 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $I_{pp}$
+\end_inset
+
+ will be slightly smaller then the approximaton 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq: int out - approximation d to infty"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+I_{pp}=\frac{1}{2}\sum_{k=1}^{N}\frac{1}{\lambda_{k}^{p}}\left(\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}-\epsilon\label{eq:int out d to infty}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1301,16 +1404,45 @@ as
 \begin_inset Formula $\lambda^{q}(x)$
 \end_inset
 
- do not have common support.
- Therefore 
+ do not have a common support.
+ Therefore
 \begin_inset Formula 
-\[
-\text{var}(d)=\frac{1}{I_{11}}+\frac{1}{I_{22}}
-\]
+\begin{alignat}{1}
+\text{var}(d) & =\frac{1}{I_{11}}+\frac{1}{I_{22}}\nonumber \\
+ & =2\left(\frac{1}{I_{11}^{\text{static}}-\epsilon}+\frac{1}{I_{22}^{\text{static}}-\epsilon}\right)\nonumber \\
+ & >2\text{var}(d^{\text{static}})\label{eq:variance d static vs blinking}
+\end{alignat}
 
 \end_inset
 
-as in the static (non-blinking) section.
+where 
+\begin_inset Formula $I^{\text{static}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{var}^{\text{static}}$
+\end_inset
+
+ corresopnd to the Fisher information matrix Eq.
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Fisher Info for Poisson"
+
+\end_inset
+
+ and the variance Eq.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:variance alternative"
+
+\end_inset
+
+ of the static case.
+ 
 \end_layout
 
 \begin_layout Standard
