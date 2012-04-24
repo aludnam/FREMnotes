@@ -556,11 +556,11 @@ For two sources
 \end_inset
 
  of the variable 
-\begin_inset Formula $\bm{c}=(c_{1},c_{2})$
+\begin_inset Formula $\bm{c}=(c_{1},c_{2})^{T}$
 \end_inset
 
  where 
-\begin_inset Formula $\bm{a}=(1,-1)$
+\begin_inset Formula $\bm{a}=(1,-1)^{T}$
 \end_inset
 
 .
@@ -640,7 +640,7 @@ and the variance of
  
 \begin_inset Formula 
 \begin{equation}
-\textrm{var}(d)=(1,-1)^{T}\cdot\bm{Q}\cdot(1,-1)=\frac{I_{11}+I_{22}+2I_{12}}{I_{11}I_{12}-I_{12}^{2}}\label{eq:variance alternative}
+\textrm{var}(d)=(1,-1)^{T}\cdot\bm{Q}\cdot(1,-1)=\frac{I_{11}+I_{22}+2I_{12}}{I_{11}I_{12}-I_{12}^{2}}=\frac{p}{q}\label{eq:variance alternative}
 \end{equation}
 
 \end_inset
@@ -653,72 +653,96 @@ I_{11}=\sum_{k=1}^{K}\frac{1}{\lambda_{k}}\left(\frac{\partial\lambda_{k}}{\part
 
 \end_inset
 
-where
+where 
+\begin_inset Formula $q_{k}(c_{i})$
+\end_inset
+
+ is the pixelised version (pixel area 
+\begin_inset Formula $\Gamma_{k}$
+\end_inset
+
+) of the PSF
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{alignat*}{2}
-q_{k}(c) & =\int_{C_{k}}q(x-c)dx & ,\ (q_{k}(0)=q_{k})\\
-q'_{k}(c) & =\int_{C_{k}}\frac{\partial q(x-c)}{\partial x}dx & ,\ (q'_{k}(0)=q'_{k})
+\begin{alignat*}{1}
+q_{k}(c_{i}) & =\int_{\Gamma_{k}}q(x-c_{i})dx\\
+q'_{k}(c_{i}) & =\int_{\Gamma_{k}}\frac{\partial q(x-c_{i})}{\partial x}dx
 \end{alignat*}
 
 \end_inset
 
+If we use 
+\begin_inset Formula 
+\[
+f_{k}(c_{1},c_{2})=\Lambda_{1}q_{k}(c_{1})+\Lambda_{2}q_{k}(c_{2}),
+\]
 
+\end_inset
+
+we get expressions for the terms of the Fisher information matrix: 
 \begin_inset Formula 
 \[
 \]
 
 \end_inset
 
- If this keeps translational invariance (non-pixelised version does as 
-\begin_inset Formula $\int_{\mathbb{R}}g(x+c)dx=\int_{\mathbb{R}}g(x)dx$
-\end_inset
 
-) then 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-I_{11}=\sum_{k=1}^{K}\frac{\left(\Lambda_{1}q'_{k}\right)^{2}}{\Lambda_{1}q_{k}+\Lambda_{2}q_{k}(-d)}
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $d=c_{1}-c_{2}$
-\end_inset
-
- and 
-\begin_inset Formula 
-\[
-I_{22}=\sum_{k=1}^{K}\frac{\left(\Lambda_{2}q'_{k}\right)^{2}}{\Lambda_{2}q_{k}+\Lambda_{1}q_{k}(d)}
-\]
-
-\end_inset
-
-For symmetrical PSF 
-\begin_inset Formula $q(x-d)=q(x+d)$
-\end_inset
-
- we have 
 \begin_inset Formula 
 \begin{equation}
-I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q'_{k}\right)^{2}}{\Lambda_{i}q_{k}+\Lambda_{j}q_{k}(d)}\label{eq:Fisher Information alternative - Individual}
+\begin{aligned}I_{ii} & =\Lambda_{i}^{2}\sum_{k=1}^{K}\frac{\left(q'_{k}(c_{i})\right)^{2}}{f_{k}(c_{1},c_{2})}\\
+I_{ij} & =\Lambda_{i}\Lambda_{j}\sum_{k=1}^{K}\frac{q'_{k}(c_{i})q'_{k}(c_{j})}{f_{k}(c_{1},c_{2})}
+\end{aligned}
+\label{eq:Fisher Information alternative - Individual}
 \end{equation}
 
 \end_inset
 
-And the cross term (
-\begin_inset Formula $i\neq j$
+ 
+\end_layout
+
+\begin_layout Standard
+Numerator 
+\begin_inset Formula $p=I_{11}+I_{22}+2I_{12}$
 \end_inset
 
-) 
+ in Eq.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:variance alternative"
+
+\end_inset
+
+
 \begin_inset Formula 
 \[
-I_{ij}=\sum_{k=1}^{K}\frac{\Lambda_{i}\Lambda_{j}q'_{k}q'_{k}(d)}{\Lambda_{i}q_{k}+\Lambda_{j}q_{k}(d)}
+p=\sum_{k=1}^{K}\frac{1}{f_{k}(c_{1},c_{2})}\left[\Lambda_{1}^{2}q'_{k}^{2}(c_{1})+\Lambda_{2}^{2}q'_{k}^{2}(c_{2})+2\Lambda_{1}\Lambda_{2}q'_{k}(c_{1})q'_{k}(c_{2})\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The terms in the denominator 
+\begin_inset Formula $r=I_{11}I_{22}-I_{12}^{2}$
+\end_inset
+
+ in Eq.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:variance alternative"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\begin{alignedat}{1}I_{11}I_{22} & =\Lambda_{1}^{2}\Lambda_{2}^{2}\sum_{k,l}^{K}\frac{\left(q'_{k}(c_{1})q'_{l}(c_{2})\right)^{2}}{f_{k}(c_{1},c_{2})f_{l}(c_{1},c_{2})}\\
+I_{12}^{2} & =\Lambda_{1}^{2}\Lambda_{2}^{2}\sum_{k,l}^{K}\frac{q'_{k}(c_{1})q'_{k}(c_{2})q'_{l}(c_{1})q'_{l}(c_{2})}{f_{k}(c_{1},c_{2})f_{l}(c_{1},c_{2})}
+\end{alignedat}
 \]
 
 \end_inset
@@ -728,52 +752,38 @@ I_{ij}=\sum_{k=1}^{K}\frac{\Lambda_{i}\Lambda_{j}q'_{k}q'_{k}(d)}{\Lambda_{i}q_{
 
 \begin_layout Subparagraph
 Limit 
-\begin_inset Formula $d\rightarrow0$
+\begin_inset Formula $c_{1}\rightarrow c_{2},\,(d\rightarrow0)\Rightarrow q_{k}(c_{1})\rightarrow q_{k}(c_{2})$
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-For 
-\begin_inset Formula $d=0$
-\end_inset
-
- we have
-\begin_inset Formula 
-\begin{alignat*}{1}
-I_{ii} & =\frac{\Lambda_{i}^{2}}{\Lambda_{i}+\Lambda_{j}}S(0)\\
-I_{ij} & =\frac{\Lambda_{i}\Lambda_{j}}{\Lambda_{i}+\Lambda_{j}}S(0)
-\end{alignat*}
-
-\end_inset
-
-where 
-\begin_inset Formula $S(d)=\sum_{k=1}^{K}\frac{\left(q'_{k}\right)^{2}}{q_{k}+q_{k}(d)}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Numerator 
-\begin_inset Formula $p$
-\end_inset
-
- in Eq.
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:variance alternative"
-
-\end_inset
-
- 
 \begin_inset Formula 
 \[
-p=I_{11}+I_{22}+2I_{12}=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}^{2}+\Lambda_{2}^{2}+2\Lambda_{1}\Lambda_{2})=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}+\Lambda_{2})^{2}
+p=(\Lambda_{1}^{2}+\Lambda_{2}^{2}+2\Lambda_{1}\Lambda_{2})\sum_{k=1}^{K}\frac{q'_{k}^{2}(c)}{f_{k}(c,c)}
 \]
 
+\end_inset
+
+which can be further simplified by explicitly writing 
+\begin_inset Formula $f_{k}(c_{1},c_{2})$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p=(\Lambda_{1}+\Lambda_{2})\sum_{k=1}^{K}\frac{q'_{k}^{2}(c)}{q_{k}(c)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $q_{k}$
+\end_inset
+
+ as a PSF is positive function, therefore the sum is not zero and 
+\begin_inset Formula $p$
 \end_inset
 
  is non-zero for any 
@@ -781,25 +791,43 @@ p=I_{11}+I_{22}+2I_{12}=\frac{S(0)}{\Lambda_{1}+\Lambda_{2}}(\Lambda_{1}^{2}+\La
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Standard
-The denominator in Eq.
+The two terms in the denominator in Eq.
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:variance alternative"
 
 \end_inset
 
- 
+ are identical for 
+\begin_inset Formula $c_{1}=c_{2}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I_{11}I_{22}=I_{12}^{2}=\frac{\Lambda_{1}^{2}\Lambda_{2}^{2}}{\left(\Lambda_{1}+\Lambda_{2}\right)^{2}}\sum_{k,l=1}^{K}\frac{q'_{k}(c)}{q_{k}(c)}\frac{q'_{l}(c)}{q_{l}(c)}
+\]
+
+\end_inset
+
+and therefore 
 \begin_inset Formula 
 \begin{eqnarray*}
-r=\det\left[\bm{I}(\theta)\right]=I_{11}I_{22}-I_{12}^{2}=\frac{S^{2}(0)}{\left(\Lambda_{1}+\Lambda_{2}\right)^{2}}\left(\Lambda_{1}^{2}\Lambda_{2}^{2}-(\Lambda_{1}\Lambda_{2})^{2}\right) & \equiv & 0\ \text{for any }\Lambda_{i}
+r=I_{11}I_{22}-I_{12}^{2}=\det\left[\bm{I}(\theta)\right] & \equiv & 0
 \end{eqnarray*}
 
 \end_inset
 
+for any 
+\begin_inset Formula $\Lambda_{i}$
+\end_inset
 
+.
+ 
 \begin_inset Formula $\bm{I}(\theta)$
 \end_inset
 
@@ -811,16 +839,15 @@ r=\det\left[\bm{I}(\theta)\right]=I_{11}I_{22}-I_{12}^{2}=\frac{S^{2}(0)}{\left(
 \begin_inset Formula $\bm{I}^{-1}(\theta)$
 \end_inset
 
- does not exist.
- 
-\end_layout
-
-\begin_layout Standard
-However, for the limit 
-\begin_inset Formula $d\rightarrow0$
+ does not exist for 
+\begin_inset Formula $c_{1}=c_{2}$
 \end_inset
 
- and 
+, but the limit 
+\begin_inset Formula $c_{1}\rightarrow c_{2},\,(d\rightarrow0)$
+\end_inset
+
+ gives 
 \begin_inset Formula $p\neq0,\, r\rightarrow0$
 \end_inset
 
@@ -842,10 +869,42 @@ Limit
 
 \begin_layout Standard
 The cross term 
+\begin_inset Formula $I_{ij}$
+\end_inset
+
+ in Eq.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Fisher Information alternative - Individual"
+
+\end_inset
+
+ vanishes (
 \begin_inset Formula $I_{ij}=0,\: i\neq j$
 \end_inset
 
- and we get f
+) because of the multiplication 
+\begin_inset Formula $q'_{k}(c_{1})q'_{k}(c_{2})$
+\end_inset
+
+ which is zero for largely separated PSF with finite support (if the support
+ of 
+\begin_inset Formula $q_{k}(c_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{k}(c_{2})$
+\end_inset
+
+ do not have mutual overlap).
+ Then from Eq.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:variance alternative"
+
+\end_inset
+
+ 
 \begin_inset Formula 
 \[
 \textrm{var}(d)=\frac{1}{I_{11}}+\frac{1}{I_{22}}
@@ -853,39 +912,26 @@ The cross term
 
 \end_inset
 
-and 
+which is the sum of variances for estimation two separated sources.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-I_{ii}=\sum_{k=1}^{K}\frac{\left(\Lambda_{i}q_{k}'\right)^{2}}{\Lambda_{i}q_{k}+\Lambda_{j}q_{k}(d)}=\Lambda_{i}\sum_{k=1}^{K}\frac{\left(q_{k}'\right)^{2}}{q_{k}}=2\Lambda_{i}S(0)
+I_{ii}=\Lambda_{i}^{2}\sum_{k=1}^{K}\frac{q_{k}'^{2}(c_{i})}{\Lambda_{1}q_{k}(c_{1})+\Lambda_{2}q_{k}(c_{2})}=\Lambda_{i}\sum_{k=1}^{K}\frac{q_{k}'^{2}(c_{i})}{q_{k}(c_{i})}
 \]
 
 \end_inset
 
-as the PSF 
-\begin_inset Formula $q(x)$
+if 
+\begin_inset Formula $q_{k}(c_{i})$
 \end_inset
 
- (and also 
-\begin_inset Formula $q'(x)$
+ (and 
+\begin_inset Formula $q_{k}'(c_{i})$
 \end_inset
 
-) have a finite support, if 
-\begin_inset Formula $d$
-\end_inset
-
- is big, 
-\begin_inset Formula $q(x-d)$
-\end_inset
-
- is outside the support of the 
-\begin_inset Formula $q'(x)$
-\end_inset
-
-.
- They have no overlap so it doesn't have any effect in the denominator.
+) have a finite support.
 \end_layout
 
 \begin_layout Standard
@@ -1442,6 +1488,8 @@ reference "eq:variance alternative"
 \end_inset
 
  of the static case.
+ The factor of 2 stems from the fact that the total number of photons is
+ double in the static case compared to the blinking model.
  
 \end_layout
 
