@@ -1107,12 +1107,16 @@ for four state model of two sources:
 \begin_inset Formula $\left\{ (\Lambda_{1},0),(0,\Lambda_{2}),(\Lambda_{1},\Lambda_{2}),(0,0)\right\} $
 \end_inset
 
+ with uniform background intensity 
+\begin_inset Formula $b$
+\end_inset
+
 : 
-\begin_inset Formula $\lambda^{1}=\Lambda_{1}q(x-c_{1})$
+\begin_inset Formula $\lambda^{1}=\Lambda_{1}q(x-c_{1})+b$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda^{2}=\Lambda_{2}q(x-c_{2})$
+\begin_inset Formula $\lambda^{2}=\Lambda_{2}q(x-c_{2})+b$
 \end_inset
 
 , 
@@ -1126,11 +1130,11 @@ for four state model of two sources:
 \color none
 \lang english
 
-\begin_inset Formula $\lambda^{3}=+\Lambda_{1}q(x-c_{1})+\Lambda_{2}q(x-c_{2})$
+\begin_inset Formula $\lambda^{3}=+\Lambda_{1}q(x-c_{1})+\Lambda_{2}q(x-c_{2})+b$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda^{4}=0$
+\begin_inset Formula $\lambda^{4}=0+b$
 \end_inset
 
 
@@ -1200,7 +1204,7 @@ I_{pp}(\theta) & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\left\{ \frac{\sum_{i=1}^{4}
 \end_inset
 
 For the four states model we have 
-\begin_inset Formula $\lambda^{3}(c_{1},c_{2})=\lambda^{1}(c_{1})+\lambda^{2}(c_{2})$
+\begin_inset Formula $\lambda^{3}(c_{1},c_{2})=\lambda^{1}(c_{1})+\lambda^{2}(c_{2})-b$
 \end_inset
 
  and so 
@@ -1304,22 +1308,17 @@ Sources are far apart and
 \begin_inset Formula $\lambda^{2}$
 \end_inset
 
- don not have a common overlap.
+ do not have a common overlap.
  For 
 \begin_inset Formula $k'$
 \end_inset
 
  where 
-\begin_inset Formula $\lambda_{k'}^{1}>0,\,\lambda_{k'}^{2}\equiv0$
+\begin_inset Formula $\frac{\partial\lambda_{k'}^{p}}{\partial c_{p}}\neq0,\,\frac{\partial\lambda_{k'}^{q}}{\partial c_{p}}\equiv0$
 \end_inset
 
  and 
-\begin_inset Formula $\text{Po}(n_{k'},\lambda_{k'}^{3})=\text{Po}(n_{k'},\lambda_{k'}^{1}+\lambda_{k'}^{2})=\mbox{Po}(n_{k'},\lambda_{k'}^{1})$
-\end_inset
-
-.
- Also 
-\begin_inset Formula $\frac{\partial\lambda^{p}}{\partial c_{q}}=0,\: p\neq q$
+\begin_inset Formula $\text{Po}(n_{k'},\lambda_{k'}^{3})=\mbox{Po}(n_{k'},\lambda_{k'}^{1})$
 \end_inset
 
 .
@@ -1338,7 +1337,12 @@ reference "eq:Fisher Info Integrated Out - diagonal entries"
 \begin_inset Formula $\frac{\partial\text{Po}(\lambda^{p})}{\partial c_{p}}\frac{\partial\text{Po}(\lambda^{q})}{\partial c_{q}}=0$
 \end_inset
 
-) and the diagonal elemets 
+).
+ For bacground free images (
+\begin_inset Formula $b=0$
+\end_inset
+
+) the diagonal elements 
 \begin_inset Formula 
 \begin{alignat*}{1}
 I_{pp} & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(2\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\partial c_{p}}\right)^{2}}{\left(2\textrm{Po}(\lambda_{k}^{p})\right)^{2}}\right]\\
@@ -1364,6 +1368,40 @@ reference "eq:Fisher Info for Poisson"
 \end_inset
 
 ).
+ The factor 1/2 comes from the fact that the source appears only in 50%
+ of the observations.
+\end_layout
+
+\begin_layout Standard
+When the background is present 
+\begin_inset Formula 
+\begin{alignat*}{1}
+I_{pp} & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(2\frac{\partial\textrm{Po}(\textrm{\lambda}_{k}^{p})}{\partial c_{p}}\right)^{2}}{\left(2\textrm{Po}(\lambda_{k}^{p})+2\mbox{Po}(b)\right)^{2}}\right]\\
+ & =\sum_{k=1}^{N}\mathbb{E}_{k}\left[\frac{\left(\textrm{Po}(\textrm{\lambda}_{k}^{p})\frac{\left(n_{k}-\lambda_{k}^{p}\right)}{\lambda_{k}^{p}}\frac{\partial\lambda_{k}^{p}}{\partial c_{p}}\right)^{2}}{\left(\textrm{Po}(\lambda_{k}^{p})+\mbox{Po}(b)\right)^{2}}\right]\\
+ & =\sum_{k=1}^{N}\left(\frac{1}{\lambda_{k}^{p}}\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left(\frac{\mbox{Po}(\lambda_{k}^{p})}{\mbox{Po}(\lambda_{k}^{p})+\mbox{Po}(b)}\right)^{2}\left(n_{k}-\lambda_{k}^{p}\right)^{2}\right]\\
+ & =\sum_{k=1}^{N}\left(\frac{1}{\lambda_{k}^{p}}\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left(1-\frac{\mbox{Po}(b)}{\mbox{Po}(\lambda_{k}^{p})+\mbox{Po}(b)}\right)^{2}\left(n_{k}-\lambda_{k}^{p}\right)^{2}\right]\\
+ & =\frac{1}{2}\sum_{k=1}^{N}\frac{1}{\lambda_{k}^{p}}\left(\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}-S
+\end{alignat*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+S=\sum_{k=1}^{N}\left(\frac{1}{\lambda_{k}^{p}}\frac{\partial\textrm{\lambda}_{k}^{p}}{\partial c_{p}}\right)^{2}\mathbb{E}_{k}\left[\left\{ \frac{2\mbox{Po}(b)}{\mbox{Po}(\lambda_{k}^{p})+\mbox{Po}(b)}+\left(\frac{2\mbox{Po}(b)}{\mbox{Po}(\lambda_{k}^{p})+\mbox{Po}(b)}\right)^{2}\right\} \left(n_{k}-\lambda_{k}^{p}\right)^{2}\right].
+\]
+
+\end_inset
+
+This term is positive and therefore reduces 
+\begin_inset Formula $I_{pp}$
+\end_inset
+
+ and increases 
+\begin_inset Formula $\mbox{var}(d)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
